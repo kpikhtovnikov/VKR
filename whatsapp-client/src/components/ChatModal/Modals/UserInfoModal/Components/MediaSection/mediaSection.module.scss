@@ -1,0 +1,32 @@
+.mediaScreen {
+  border-bottom: 8px solid #0d1418;
+  background-color: #131c21;
+  padding: 10px 20px 10px 20px;
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  svg {
+    height: 17px;
+    color: #828689;
+    cursor: pointer;
+    margin-left: 2px;
+    width: 20px;
+  }
+}
+
+.media {
+  margin: 5px;
+  cursor: pointer;
+  img {
+    height: 50px;
+    width: 50px;
+    object-fit: contain;
+  }
+}
+
+.mediaThumbnails {
+  display: flex;
+  flex-wrap: wrap;
+}
