@@ -19,7 +19,8 @@ export const socketMain = async (io: any, socket: any) => {
       io,
       socket
     );
-
+    console.log(socket)
+    
     handleActiveSession(io, socket, _id);
 
     // Signin success state
@@ -48,7 +49,7 @@ export const socketMain = async (io: any, socket: any) => {
       disconnectVideoCall(socket, roomId, peerUserId)
     );
 
-    // whien user rejects call
+    // when user rejects call
     socket.on("reject-call", (roomId: string) =>
       rejectVideoCall(socket, roomId)
     );

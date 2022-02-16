@@ -14,7 +14,7 @@ export const authSlice = createSlice({
   reducers: {
     initiateSignin: (state, action) => {
       state.loading = true;
-      // console.log(state)
+      console.log(state)
     },
 
     initAuthuserInfoUpdate: (state, action) => {

@@ -8,6 +8,7 @@ export const RoomMain = () => {
     <div className={s.roomMain}>
       <MyVideo key={"MyVideo"} videos={videos} setVideos={setVideos} />
       {Object.entries(videos).map((e: any) => {
+        console.log(e)
         return e[1];
       })}
     </div>

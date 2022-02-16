@@ -57,6 +57,7 @@ export const ChatContainerHead = connect(
         : null;
 
     const initiateACall = () => {
+      console.log('call start')
       initiateCall({
         active: true,
         callBy: authUser.objectId,

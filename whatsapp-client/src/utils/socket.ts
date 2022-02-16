@@ -37,6 +37,7 @@ export class SocketIO {
   private configure() {
     // Socket Verified
     this.socket?.on("signInSuccess", (mainPayload: any) => {
+      console.log(mainPayload)
       store.dispatch(setAuthSuccess(mainPayload));
 
       store.dispatch(getInitialChats());

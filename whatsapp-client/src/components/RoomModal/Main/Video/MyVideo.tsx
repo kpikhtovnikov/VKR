@@ -68,7 +68,9 @@ export const MyVideo = connect(
             // Answer for that call will be our stream
             call.answer(stream);
             // When we recieve their streamlk
+            console.log('call peer')
             call.on("stream", (otherStream: MediaStream) => {
+              console.log('STREAM')
               setVideos((prev: any) => ({
                 ...prev,
                 [otherStream.id]: (
@@ -91,6 +93,7 @@ export const MyVideo = connect(
 
       peer.on("open", (myPeerId: string) => {
         // When we first open the app, have us join a room
+        console.log('join-vc-room')
         getActiveSocket().emit("join-vc-room", room.peerId, myPeerId);
       });
     }, []);

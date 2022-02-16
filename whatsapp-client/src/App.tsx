@@ -22,7 +22,7 @@ const passStateToProps = ({ authState, chatState }: any) => ({
 const App = connect(passStateToProps)(({ authState, chatState }: any) => {
   return (authState.auth ? (
     <div>
-      {/* {authState.socketStatus ? null : (
+      {authState.socketStatus ? null : (
         <div className={s.smoke}>
           <div className={s.modal}>
             <div className={s.disconnectedModal}>
@@ -30,7 +30,7 @@ const App = connect(passStateToProps)(({ authState, chatState }: any) => {
             </div>
           </div>
         </div>
-      )} */}
+      )}
       <CallerInfo />
       <RoomModal />
       <MovableModal />
