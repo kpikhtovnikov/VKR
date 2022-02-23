@@ -43,13 +43,17 @@ function* googleSignIn(payload?: any) {
     process.env.REACT_APP_SERVER_URL as string,
     getAccessToken()
   );
-  yield call(initializedSocket.getActiveSocket);
+  // yield call(initializedSocket.getActiveSocket);
+  initializedSocket.getActiveSocket();
   //@ts-ignore
+  console.log('after yield call(initializedSocket.getActiveSocket)')
   const socket = getActiveSocket();
+  console.log(socket)
   if (socket) {
     yield put(setSocketConnectionSuccess());
   }
 }
+
 
 // Guest SignIn ---------------------------------------------------
 const handleGuestSignIn = async () => {
