@@ -3,6 +3,7 @@ const activeUsers: any = [];
 
 export const addToActiveUsers = (user: any) => {
   activeUsers.push(user);
+  console.log(activeUsers)
 };
 
 export const getActiveUsers = () => activeUsers;

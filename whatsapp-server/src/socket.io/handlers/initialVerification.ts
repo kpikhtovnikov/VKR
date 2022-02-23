@@ -20,6 +20,7 @@ export const initialSocketConfig = async (
 
   // All users data
   const users = await db.collection("googleAuthUsers").find().toArray();
+  console.log(users)
 
   return {
     _id,

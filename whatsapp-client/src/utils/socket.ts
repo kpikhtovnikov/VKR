@@ -126,12 +126,14 @@ export class SocketIO {
   public async getActiveSocket(): Promise<
     Socket<DefaultEventsMap, DefaultEventsMap>
   > {
+    console.log('entry point to getActiveSocket()')
     return await new Promise((resolve) => {
-      this.socket.on("connect", () => {
-        this.configure();
-        setActiveSocket(this.socket);
-        resolve(this.socket);
-      });
+        this.socket.on("connect", () => {
+          console.log('entry point to connect')
+          this.configure();
+          setActiveSocket(this.socket);
+          resolve(this.socket);
+        });
     });
   }
 }

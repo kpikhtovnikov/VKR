@@ -22,9 +22,9 @@ export const handleActiveSession = (
     console.log("Prev Disconnected, New session!");
     // Old session removed
     const prevSocketId = getActiveUserByObjectId(_id)?.socketId;
-    console.log(prevSocketId, io.sockets.sockets.get(prevSocketId));
+    // console.log(prevSocketId, io.sockets.sockets.get(prevSocketId));
     if (io.sockets.sockets.get(prevSocketId)) {
-      console.log(prevSocketId + "disconnected");
+      // console.log(prevSocketId + "disconnected");
       io.sockets.sockets.get(prevSocketId).emit("multipleSession");
       io.sockets.sockets.get(prevSocketId).disconnect(true);
     }

@@ -3,6 +3,9 @@ import { verify } from "jsonwebtoken";
 // Socket.io middleware
 export const isAuthSocket = (socket: any, next: any) => {
   const { accessToken }: any = socket.handshake.auth;
+  
+  console.log(accessToken)
+  
   verify(
     accessToken,
     process.env.JWT_ACCESS_SECRET,

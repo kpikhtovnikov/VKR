@@ -19,9 +19,11 @@ export const socketMain = async (io: any, socket: any) => {
       io,
       socket
     );
-    console.log(socket)
+    console.log('entry point to socketMain')
     
     handleActiveSession(io, socket, _id);
+
+    console.log('after handleActiveSession')
 
     // Signin success state
     socket.emit("signInSuccess", {
@@ -33,6 +35,8 @@ export const socketMain = async (io: any, socket: any) => {
       about: userPayload.about,
       lastSeen: userPayload.lastSeen,
     });
+
+    console.log('after socket.emit("signInSuccess")')
 
     // call other user
     socket.on("callOtherUser", (payload: any) =>

@@ -117,11 +117,13 @@ import { isAuthSocket } from "./middlewares/isAuthSocket.middleware";
     io.use(isAuthSocket);
 
     io.on("connection", (socket: socket.Socket) => {
+      console.log('entry point to connection')
+      //ошибка где-то тут
       socketMain(io, socket);
       console.log(`connected to worker: ${cluster.worker.id}`);
     });
 
-    console.log('after connection')
+    // console.log('after connection')
     // Listen to messages sent from the master. Ignore everything else.
     process.on("message", (message, connection) => {
       if (message !== "sticky-session:connection") {
@@ -130,6 +132,7 @@ import { isAuthSocket } from "./middlewares/isAuthSocket.middleware";
 
       // Emulate a connection event on the server by emitting the
       // event with the connection the master sent us.
+      console.log('before connection emit')
       server.emit("connection", connection);
       //@ts-ignore
       connection.resume();
