@@ -68,7 +68,11 @@ export const SidebarHead = connect(
           )}
         </span>
         <div className={s.headControls}>
-          <span className="icons">
+          <span 
+          onClick={() => {
+            alert('video chat')
+          }}
+          className="icons">
             <svg
               id="ee51d023-7db6-4950-baf7-c34874b80976"
               xmlns="http://www.w3.org/2000/svg"
