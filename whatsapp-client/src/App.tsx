@@ -1,3 +1,11 @@
+import React from "react"
+import ReactDOM from "react-dom"
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom"
+
 import { CallerInfo } from "components/CallerInfo/CallerInfo";
 import { connect } from "react-redux";
 import s from "./App.module.scss";
@@ -13,6 +21,7 @@ import { getAccessToken } from "utils/accessToken";
 import { SidebarChatSkeletons } from "skeletons/SidebarChatSkeletons";
 import { SidebarChats } from "components/SidebarChats/SidebarChats";
 import { SidebarVoices } from "components/SidebarVoices/SidebarVoices";
+import VideoPage from "components/videoPage/videoPage";
 
 const passStateToProps = ({ authState, chatState }: any) => ({
   authState,
@@ -22,6 +31,9 @@ const passStateToProps = ({ authState, chatState }: any) => ({
 const App = connect(passStateToProps)(({ authState, chatState }: any) => {
   return (authState.auth ? (
     <div>
+        <Routes>
+          <Route path='/videoPage' element={<VideoPage />}/>
+        </Routes>
       {/* {authState.socketStatus ? null : (
         <div className={s.smoke}>
           <div className={s.modal}>

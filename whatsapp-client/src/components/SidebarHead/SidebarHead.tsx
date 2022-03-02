@@ -2,7 +2,11 @@ import s from "./sidebarHeadStyles.module.scss";
 import { connect } from "react-redux";
 import { setDropDown } from "redux/reducers/dropDown";
 import { setSidebarModal } from "redux/reducers/sidebarChatModal";
+import VideoPage from "components/videoPage/videoPage";
+import { useState } from "react";
+import { Routes ,Route, Link } from 'react-router-dom';
 // import { setAuthState } from "redux/reducers/auth";
+
 
 const passDispatchToProps = (dispatch: any) => ({
   setPersonalSettingsDropdown: (dropDown: any) =>
@@ -27,6 +31,20 @@ export const SidebarHead = connect(
     setPersonalSettingsDropdown,
     setSidebarModal,
   }: any) => {
+    // <Route path='/roster' element={VideoPage}/>
+    const [video, setVideo] = useState(false);
+
+    const handleVideo = () => {
+      // console.log(video)
+      // if (video) {
+      //   setVideo(true)
+      // } else {
+      //   setVideo(false)
+      // }
+      setVideo(!video)
+      console.log(video)
+    }
+
     const toggleDropdown = (e: any) => {
       if (dropDown.type === "personalSetting") {
         setPersonalSettingsDropdown({
@@ -68,10 +86,10 @@ export const SidebarHead = connect(
           )}
         </span>
         <div className={s.headControls}>
-          <span 
-          onClick={() => {
-            alert('video chat')
-          }}
+        {/* {!video ? null : <Link to='/roster'/> } */}
+        <Link to='/videoPage'>
+          <span
+          onClick={handleVideo}
           className="icons">
             <svg
               id="ee51d023-7db6-4950-baf7-c34874b80976"
@@ -86,6 +104,7 @@ export const SidebarHead = connect(
               ></path>
             </svg>
           </span>
+          </Link>
           <span
             onClick={() => {
               setSidebarModal({
