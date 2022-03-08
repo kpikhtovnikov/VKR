@@ -32,6 +32,7 @@ export const CallerInfo = connect(
   };
 
   const acceptCall = () => {
+    // console.log(callerInfo)
     setRoomModal({
       peerId: callerInfo.peerId,
       callBy: null,

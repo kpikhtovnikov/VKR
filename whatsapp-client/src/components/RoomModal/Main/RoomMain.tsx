@@ -4,6 +4,7 @@ import { MyVideo } from "./Video/MyVideo";
 
 export const RoomMain = () => {
   const [videos, setVideos] = useState<any>({});
+  // console.log(videos)
   return (
     <div className={s.roomMain}>
       <MyVideo key={"MyVideo"} videos={videos} setVideos={setVideos} />

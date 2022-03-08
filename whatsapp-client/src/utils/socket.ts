@@ -81,6 +81,7 @@ export class SocketIO {
       });
 
       this.socket.on("incomingCall", (payload: any) => {
+        console.log(payload)
         store.dispatch(othersCalling(payload));
       });
 
@@ -89,6 +90,7 @@ export class SocketIO {
       });
 
       this.socket.on("user-connected-to-vc", (payload: any) => {
+        console.log(payload)
         store.dispatch(setNewConnection(payload));
       });
 

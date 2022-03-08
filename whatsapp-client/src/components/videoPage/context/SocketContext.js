@@ -3,7 +3,7 @@ import {io} from 'socket.io-client';
 import {currentWebRTC} from './WebRTC';
 import {currentUserWebRTC} from "./userWebRTC";
 
-const LOCALHOST = 'http://localhost:3000' ;
+const LOCALHOST = 'http://localhost:8080';
 
 const DEFAULT_SOCKET = {};
 

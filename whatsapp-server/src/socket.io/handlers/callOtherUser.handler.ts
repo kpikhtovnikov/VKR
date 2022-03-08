@@ -10,6 +10,8 @@ export const callOtherUser = async (
 ) => {
   if (payload?.extraParam) {
     const to = getActiveUserByObjectId(payload.extraParam.callTo);
+    console.log('callOtherUser')
+    console.log(to)
     if (to) {
       io.to(to.socketId).emit("incomingCall", {
         peerId: payload.peerId,

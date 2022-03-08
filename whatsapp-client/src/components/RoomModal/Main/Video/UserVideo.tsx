@@ -22,8 +22,7 @@ export const UserVideo = connect(
   passStateToProps,
   passDispatchToProps
 )(({ stream }: any) => {
-  const videoRef: MutableRefObject<HTMLVideoElement | null | undefined> =
-    useRef();
+  const videoRef: MutableRefObject<HTMLVideoElement | null | undefined> = useRef();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,7 +30,9 @@ export const UserVideo = connect(
       videoRef.current?.play();
       setLoading(false);
     };
+
     videoRef.current!.srcObject = stream;
+    console.log(stream)
   }, []);
 
   return (

@@ -18,6 +18,7 @@ export const roomModalSlice = createSlice({
     },
 
     setNewConnection: (state, action) => {
+      console.log(action.payload)
       state.newConnection = action.payload;
     },
 

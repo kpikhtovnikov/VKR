@@ -15,6 +15,8 @@ import * as cookieParser from "cookie-parser";
 import { socketMain } from "./socket.io/socketMain";
 import { inititalizeMongoDb } from "./database/mongoInstance";
 import { isAuthSocket } from "./middlewares/isAuthSocket.middleware";
+const signalling = require('./signalling');
+// const customGenerationFunction = () => (Math.random().toString(36) + '0000000000000000000').substr(2, 16);
 
 (async () => {
   if (cluster.isMaster) {
@@ -67,6 +69,8 @@ import { isAuthSocket } from "./middlewares/isAuthSocket.middleware";
       }
     );
 
+    // signalling(server);
+
     server.listen(port);
     console.log(`Master listening on port ${port}`);
   } else {
@@ -86,11 +90,20 @@ import { isAuthSocket } from "./middlewares/isAuthSocket.middleware";
     // app.use(isAuthREST);
     // Don't expose our internal server to the outside world.
 
-    await PeerServer({ port: 9000, path: "/peer-server" });
+    // await PeerServer({ port: 9000, path: "/peer-server" });
+    // const peerServer = await PeerServer({ 
+    //   port: 9000, 
+    //   path: "/peer-server", 
+    //   // generateClientId: customGenerationFunction 
+    // });
+    // console.log(peerServer)
+
+    // app.use(peerServer);
 
     app.use("/", router);
 
     const server: http.Server = app.listen(0, "localhost");
+    // const server: http.Server = app.listen(port);
     console.log("Worker listening...");
 
     const io = new socket.Server(server, {
@@ -99,6 +112,7 @@ import { isAuthSocket } from "./middlewares/isAuthSocket.middleware";
         credentials: true,
       },
     });
+    // signalling(server, io);
 
     // Tell Socket.IO to use the redis adapter. By default, the redis
     // server is assumed to be on localhost:6379. You don't have to
@@ -132,7 +146,7 @@ import { isAuthSocket } from "./middlewares/isAuthSocket.middleware";
 
       // Emulate a connection event on the server by emitting the
       // event with the connection the master sent us.
-      console.log('before connection emit')
+      // console.log('before connection emit')
       server.emit("connection", connection);
       //@ts-ignore
       connection.resume();

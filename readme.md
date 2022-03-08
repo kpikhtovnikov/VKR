@@ -68,8 +68,20 @@ https://user-images.githubusercontent.com/64752455/142684906-f56231a1-8c20-4304-
 ### AWS S3:
 ![aws-s3](https://user-images.githubusercontent.com/64752455/142684407-1d79162e-b73b-41ab-a36d-ac408200f712.PNG)
 
+
+Install the package globally peer server:
+1. $ npm install peer -g
+2. Run the server:
+$ peerjs --port 9000 --key peerjs --path /peer-server
+Started PeerServer on ::, port: 9000, path: /peer-server (v. 0.3.2)
+
 <br>
 <br>
+<br>
+<br>
+
+
+
 
 ## Whatsapp clone using firebase (Old Version):
 
