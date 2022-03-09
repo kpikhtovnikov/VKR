@@ -6,6 +6,7 @@ import VideoPage from "components/videoPage/videoPage";
 import { useState } from "react";
 import { Routes ,Route, Link } from 'react-router-dom';
 // import { setAuthState } from "redux/reducers/auth";
+import { SidebarSearch } from "../SidebarSearch/SidebarSearch";
 
 
 const passDispatchToProps = (dispatch: any) => ({
@@ -85,9 +86,9 @@ export const SidebarHead = connect(
             </div>
           )}
         </span>
+        <SidebarSearch />
         <div className={s.headControls}>
-        {/* {!video ? null : <Link to='/roster'/> } */}
-        <Link to='/videoPage'>
+        {/* <Link to='/videoPage'>
           <span
           onClick={handleVideo}
           className="icons">
@@ -104,7 +105,7 @@ export const SidebarHead = connect(
               ></path>
             </svg>
           </span>
-          </Link>
+          </Link> */}
           <span
             onClick={() => {
               setSidebarModal({
@@ -128,7 +129,7 @@ export const SidebarHead = connect(
               ></path>
             </svg>
           </span>
-          <span
+          {/* <span
             style={
               dropDown.type === "personalSetting"
                 ? {
@@ -153,7 +154,7 @@ export const SidebarHead = connect(
                 d="M12 7a2 2 0 1 0-.001-4.001A2 2 0 0 0 12 7zm0 2a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 9zm0 6a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 15z"
               ></path>
             </svg>
-          </span>
+          </span> */}
         </div>
       </div>
     );

@@ -16,7 +16,7 @@ export const Sidebar = connect(passStateToProps)(({ chatState }: any) => {
     <div className={s.sidebar}>
       <SidebarModal />
       <SidebarHead />
-      <SidebarSearch />
+      {/* <SidebarSearch /> */}
       <div className={s.chatsContainer}>
         {chatState.loading
           ? [1, 2, 3].map((e) => {

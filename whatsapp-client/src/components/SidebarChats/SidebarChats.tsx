@@ -121,7 +121,7 @@ export const SidebarChats = connect(
               {...data.messages[data.messages.length - 1]}
               otherUser={allUsers[otherFriend?.objectId]?.displayName}
             />
-            {expandMore ? (
+            {/* {expandMore ? (
               <ExpandMoreIcon
                 onClick={(e) => handleDropMenuClicks(e, "chatInfo")}
                 style={{
@@ -129,7 +129,7 @@ export const SidebarChats = connect(
                   color: "rgb(130, 134, 137)",
                 }}
               />
-            ) : null}
+            ) : null} */}
           </div>
         </span>
       </div>

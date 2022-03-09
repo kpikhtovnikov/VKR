@@ -222,12 +222,12 @@ export const ChatContainerFooter = connect(
                 />
               </ExpandOptions>
             ) : null}
-            <SmileIcon
+            {/* <SmileIcon
               onClick={() => setActivity("emojiDrawer")}
               className={`icons ${
                 activity === "emojiDrawer" ? "active-icon" : ""
               }`}
-            />
+            /> */}
 
             {activity ? (
               <ExpandOptions reverse={reverseActivityAnimation}>
@@ -315,6 +315,14 @@ export const ChatContainerFooter = connect(
                 dangerouslySetInnerHTML={{ __html: input }}
               />
             </div>
+          </div>
+          <div className={s.footerControls}>
+            <SmileIcon
+                onClick={() => setActivity("emojiDrawer")}
+                className={`icons ${
+                  activity === "emojiDrawer" ? "active-icon" : ""
+                }`}
+            />
           </div>
           {typing ? (
             <div className={`icons ${s.sendButton}`}>

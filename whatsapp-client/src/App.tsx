@@ -50,13 +50,13 @@ const App = connect(passStateToProps)(({ authState, chatState }: any) => {
       <DropMenu />
       <div className={s.app}>
         <div className={s.appContainer}>
-          <div className={t.sidebarVoicesIndent}>
+          {/* <div className={t.sidebarVoicesIndent}>
             {chatState.loading
               ? ''
               : Object.entries(chatState.chat).map(([id, data]: any) => {
                   return <SidebarVoices key={id} /> 
                 })}
-          </div>
+          </div> */}
           <Sidebar />
           <ChatContainer />
         </div>
