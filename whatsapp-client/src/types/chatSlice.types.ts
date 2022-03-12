@@ -42,4 +42,5 @@ export interface ChatStateType {
   activeChat: null | string;
   loading: boolean;
   chat: { [k: string]: ChatType };
+  search: { [k: string]: ChatType };
 }

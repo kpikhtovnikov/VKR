@@ -11,11 +11,18 @@ export const googlelogin = async (req: any, res: any) => {
   try {
     const db: any = await mongoDB().db();
 
-    const { tokenId }: any = req.body;
+    const { tokenId, company, employee, age }: any = req.body;
+
+    console.log(company)
+    console.log(employee)
+    console.log(age)
 
     const { payload }: any = await client.verifyIdToken({
       idToken: tokenId,
     });
+
+    console.log('payload')
+    console.log(payload)
 
     if (!payload) {
       return res.status(401).json({
@@ -53,7 +60,10 @@ export const googlelogin = async (req: any, res: any) => {
         authType: "google",
         email: email,
         avatar: base64Image,
-        about: "Trying this clone...",
+        about: "О себе",
+        company: "",
+        employee: "",
+        age: "",
         createdOn: Date.now(),
       });
 

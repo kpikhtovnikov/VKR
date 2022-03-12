@@ -16,16 +16,16 @@ export const RemoveAvatar = connect(
 )(({ globalModal, setGlobalModal }: any) => {
   return (
     <div className={s.removeAvatar}>
-      <p>Remove this group's icon?</p>
+      <p>Вы действительно хотите удалить фото?</p>
       <div className={s.controlFooter}>
         <button onClick={() => setGlobalModal(null)} className={s.borderBtn}>
-          CANCEL
+          Отменить
         </button>
         <button
           onClick={globalModal.params.removeAvatar}
           className={s.coloredBtn}
         >
-          REMOVE
+          Подтвердить
         </button>
       </div>
     </div>

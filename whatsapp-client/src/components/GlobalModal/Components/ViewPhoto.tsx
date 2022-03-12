@@ -19,7 +19,7 @@ export const ViewPhoto = connect(
       <div className={s.header}>
         <span className={s.info}>
           <img src={globalModal.params.src} alt="img" />
-          <p>Profile 2</p>
+          <p>Фото</p>
         </span>
         <span
           style={{

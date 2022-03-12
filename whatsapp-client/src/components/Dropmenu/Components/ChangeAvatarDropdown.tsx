@@ -53,11 +53,11 @@ export const ChangeAvatarDropdown = connect(
       className={s.dropDown}
     >
       <div onClick={viewPhoto} className={s.list}>
-        <p>View photo</p>
+        <p>Просмотреть фото</p>
       </div>
-      <div onClick={takePhoto} className={s.list}>
-        <p>Take photo</p>
-      </div>
+      {/* <div onClick={takePhoto} className={s.list}>
+        <p>Сделать фото</p>
+      </div> */}
       <div className={s.list}>
         <input
           type="file"
@@ -66,10 +66,10 @@ export const ChangeAvatarDropdown = connect(
             dropMenu.params.handleAvatarChange(e.target.files[0])
           }
         />
-        <p>Upload photo</p>
+        <p>Загрузить фото</p>
       </div>
       <div onClick={dropMenu.params.handleRemoveImage} className={s.list}>
-        <p>Remove photo</p>
+        <p>Удалить фото</p>
       </div>
     </DropdownAnimation>
   );

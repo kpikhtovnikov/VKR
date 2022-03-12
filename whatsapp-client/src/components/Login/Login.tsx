@@ -5,6 +5,7 @@ import s from "./login.module.scss";
 import { GoogleLogin } from "react-google-login";
 // import whatsappLogo from "./WhatsApp.svg.webp";
 import whatsappLogo from "./tab-picture.png";
+import { useState } from "react";
 
 const passStateToProps = ({ authState }: any) => ({
   authLoading: authState.loading,
@@ -21,41 +22,108 @@ export const Login = connect(
   passStateToProps,
   passDispatchToProps
 )(({ initiateSignin, authLoading, authError, setAuthFailed }: any) => {
+
+  const [company, setCompany] = useState('');
+  const [employee, setEmployee] = useState('');
+  const [age, setAge] = useState('');
+  // let company = '';
+  // let employee = '';
+  // let age = '';
+
   const handleGoogleResponse = (response: any) => {
-    console.log(response);
+    // console.log(response);
     if (response.error) {
       setAuthFailed(response.error);
     } else {
       initiateSignin({
         idToken: response.tokenId,
+        company: company,
+        employee: employee,
+        age: age,
         authType: "google",
       });
     }
   };
 
+  const handleCompany = (response: any) => {
+    // console.log(response.nativeEvent.data)
+    // if(response.nativeEvent.data!=null)
+    //   company = company + response.nativeEvent.data
+    // else
+    //   company = company.slice(0, -1)
+    
+    if(response.nativeEvent.data!=null)
+      setCompany(company + response.nativeEvent.data)
+    else
+      setCompany(company.slice(0, -1))
+    
+    console.log(company);
+  };
+
+  const handleEmployee = (response: any) => {
+    // if(response.nativeEvent.data!=null)
+    //   employee = employee + response.nativeEvent.data
+    // else
+    //   employee = employee.slice(0, -1)
+
+    if(response.nativeEvent.data!=null)
+      setEmployee(employee + response.nativeEvent.data)
+    else
+      setEmployee(employee.slice(0, -1))
+    
+    console.log(employee)
+  };
+
+  const handleAge = (response: any) => {
+    // if(response.nativeEvent.data!=null)
+    //   age = age + response.nativeEvent.data
+    // else
+    //   age = age.slice(0, -1)
+
+    if(response.nativeEvent.data!=null)
+      setAge(age + response.nativeEvent.data)
+    else
+      setAge(age.slice(0, -1))
+    
+    console.log(age)
+  };
+
   return (
     <div className={s.login}>
       <img src={whatsappLogo} alt="app-icon" />
-      <p>Загрузка</p>
+      {/* <p>Загрузка</p> */}
+      <p>Войдите с помощью Google</p>
       {authLoading ? (
         <div className={s.loading}>
           <CircularProgress size="19px" color="inherit" />
         </div>
       ) : (
         <div className={s.loginControls}>
+          {/* <input
+            onChange={(e) => handleCompany(e)}
+            placeholder="Название компании"
+          />
+          <input
+            onChange={(e) => handleEmployee(e)}
+            placeholder="Должность"
+          />
+          <input
+            onChange={(e) => handleAge(e)}
+            placeholder="Возраст"
+          /> */}
           <GoogleLogin
             onSuccess={handleGoogleResponse}
             onFailure={handleGoogleResponse}
             clientId={process.env.REACT_APP_GAUTH_CLIENT_ID as string}
             render={(props: any) => (
               <button onClick={props.onClick} disabled={props.disabled}>
-                Sign in with google
+                Войти
               </button>
             )}
             cookiePolicy={"single_host_origin"}
           />
 
-          <button
+          {/* <button
             onClick={() =>
               initiateSignin({
                 authType: "guest",
@@ -63,7 +131,7 @@ export const Login = connect(
             }
           >
             Sign in as guest
-          </button>
+          </button> */}
         </div>
       )}
     </div>

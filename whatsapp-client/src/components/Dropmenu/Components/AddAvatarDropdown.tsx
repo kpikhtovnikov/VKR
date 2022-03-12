@@ -44,9 +44,9 @@ export const AddAvatarDropdown = connect(
       locationParams={dropMenu.position}
       className={s.dropDown}
     >
-      <div onClick={takePhoto} className={s.list}>
+      {/* <div onClick={takePhoto} className={s.list}>
         <p>Take photo</p>
-      </div>
+      </div> */}
       <div className={s.list}>
         <input
           type="file"
@@ -55,7 +55,7 @@ export const AddAvatarDropdown = connect(
             dropMenu.params.handleAvatarChange(e.target.files[0])
           }
         />
-        <p>Upload photo</p>
+        <p>Загрузить фото</p>
       </div>
     </DropdownAnimation>
   );

@@ -184,7 +184,7 @@ export const ChatContainerFooter = connect(
           accept=".docx, .doc, .pdf, .zip, .rar"
         />
       </DocumentIcon>,
-      <AvatarIcon className={s.avatarIcon} />,
+      // <AvatarIcon className={s.avatarIcon} />,
       <VideoCallIcon className={s.videoIcon}>
         <input
           onChange={handleAttachments}
@@ -236,18 +236,18 @@ export const ChatContainerFooter = connect(
                     display: "flex",
                   }}
                 >
-                  <GifIcon
+                  {/* <GifIcon
                     onClick={() => setActivity("gifDrawer")}
                     className={`icons ${
                       activity === "gifDrawer" ? "active-icon" : ""
                     }`}
-                  />
-                  <StickerIcon
+                  /> */}
+                  {/* <StickerIcon
                     onClick={() => setActivity("stickerDrawer")}
                     className={`icons ${
                       activity === "stickerDrawer" ? "active-icon" : ""
                     }`}
-                  />
+                  /> */}
                 </div>
               </ExpandOptions>
             ) : null}
@@ -270,7 +270,17 @@ export const ChatContainerFooter = connect(
                   }
                 }}
                 className="icons"
-              />
+              >
+              </AttachmentIcon>
+              {/* <AttachmentIcon className="icons"> */}
+              {/* <AttachmentIcon className="icons">
+                <input
+                  onChange={handleAttachments}
+                  type="file"
+                  multiple={false}
+                  accept="image/png, .docx, .doc, .pdf, .zip, .rar, video/mp4"
+                />
+              </AttachmentIcon> */}
             </div>
           </div>
           <div
@@ -280,7 +290,7 @@ export const ChatContainerFooter = connect(
             className={s.input}
           >
             {typing ? null : (
-              <span className={s.spanPlaceholder}>Type a message</span>
+              <span className={s.spanPlaceholder}>Напишите</span>
             )}
             <div className={s.spanInput}>
               <span

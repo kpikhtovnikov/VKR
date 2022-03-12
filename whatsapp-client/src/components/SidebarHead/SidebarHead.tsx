@@ -70,7 +70,7 @@ export const SidebarHead = connect(
             setSidebarModal({
               type: "userSidebar",
               params: {
-                headerTitle: "Profile",
+                headerTitle: "Мой профиль",
               },
             });
           }}
@@ -111,7 +111,7 @@ export const SidebarHead = connect(
               setSidebarModal({
                 type: "newMsgSidebar",
                 params: {
-                  headerTitle: "New Chat",
+                  headerTitle: "Создание чата",
                 },
               });
             }}

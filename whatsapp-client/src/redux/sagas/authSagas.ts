@@ -16,7 +16,7 @@ import { getActiveSocket } from "config/globalSocket";
 import { globalAxios } from "config/globalAxios";
 
 // Google SignIn -------------------------------------------
-const googleSignin = async (payload: { idToken: string }) => {
+const googleSignin = async (payload: { idToken: string, company: string, employee: string, age: string }) => {
   const data = await fetch(
     `${process.env.REACT_APP_SERVER_URL}/g-auth/authenticate`,
     {
@@ -28,6 +28,9 @@ const googleSignin = async (payload: { idToken: string }) => {
       },
       body: JSON.stringify({
         tokenId: payload.idToken,
+        company: payload.company,
+        employee: payload.employee,
+        age: payload.age
       }),
     }
   );
@@ -81,6 +84,7 @@ export function* initiateSignInSaga() {
     if (action.payload.authType === "guest") {
       yield guestSignIn(action.payload);
     } else {
+      console.log(action.payload)
       yield googleSignIn(action.payload);
     }
   });

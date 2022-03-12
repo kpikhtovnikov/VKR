@@ -1,11 +1,26 @@
 import s from "./sidebarSearchStyles.module.scss";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useEffect, useRef, useState } from "react";
+import { connect } from "react-redux";
 
-export const SidebarSearch = () => {
+const passStateToProps = ({ chatState }: any) => ({
+  chatState,
+});
+
+export const SidebarSearch = connect(passStateToProps)(({ chatState }: any) => {
   const [loading, setLoading] = useState(false);
   const [inputFocused, setInputFocused] = useState(false);
+  const [search, setSearch] = useState('');
   const [back, setBack] = useState(false);
+
+  useEffect(() => {
+    console.log(search)
+    console.log(chatState)
+  }, [search]);
+
+  // const handleSearch = (e: any) =>{
+  //   console.log(e)
+  // }
 
   return (
     <div className={s.search}>
@@ -25,8 +40,9 @@ export const SidebarSearch = () => {
         </span>
         <div className={s.searchControls}>
           <input
-            onFocus={() => setBack(true)}
-            placeholder="Search or start new chat"
+            // onFocus={() => setBack(true)}
+            onChange={(e: any) => setSearch(e.target.value)}
+            placeholder="Поиск"
           />
           {inputFocused && !loading ? (
             <span className={s.searchIcon}>
@@ -55,4 +71,4 @@ export const SidebarSearch = () => {
       </div>
     </div>
   );
-};
+});

@@ -33,7 +33,7 @@ export const DescSection = connect(
   return (
     <div className={s.infoModalDesc}>
       <p className="chatModalSectionTitle">
-        {props?.userInfo ? "Bio" : "Description"}
+        {props?.userInfo ? "О себе" : "Описание"}
       </p>
       <div
         style={

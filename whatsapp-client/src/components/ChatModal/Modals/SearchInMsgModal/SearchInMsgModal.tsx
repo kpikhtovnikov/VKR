@@ -53,7 +53,7 @@ export const SearchInMsgModal = connect(
             </svg>
           </span>
           <div className={s.searchControls}>
-            <input onFocus={() => setBack(true)} placeholder="Search..." />
+            <input onFocus={() => setBack(true)} placeholder="Поиск" />
             {inputFocused && !loading ? (
               <span className={s.searchIcon}>
                 <svg

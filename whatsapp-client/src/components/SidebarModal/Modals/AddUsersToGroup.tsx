@@ -77,7 +77,7 @@ export const AddUsersToGroup = connect(
         modifiedOn: Date.now(),
         participants,
         type: "group",
-        desc: `Group created by ${authState.auth.displayName}`,
+        desc: `Чат создал ${authState.auth.displayName}`,
       });
       closeModal();
     };
@@ -115,11 +115,11 @@ export const AddUsersToGroup = connect(
               value={grpName}
               onChange={(e: any) => setGrpName(e.target.value)}
               maxLength={30}
-              placeholder="Type a group name..."
+              placeholder="Название чата"
               type="text"
             />
           </div>
-          <p className={s.text}>AUTH CONTACTS</p>
+          <p className={s.text}>Пользователи</p>
           <div className={s.chatsContainer}>
             {Object.entries(userList)
               .filter((e: any) => (e[1]?.selected ? false : true))
@@ -151,7 +151,7 @@ export const AddUsersToGroup = connect(
               })}
           </div>
           <button onClick={createNewGroup} className={s.createGrpButton}>
-            <svg
+            {/* <svg
               xmlns="http://www.w3.org/2000/svg"
               width="26"
               height="26"
@@ -162,7 +162,8 @@ export const AddUsersToGroup = connect(
                 fillRule="evenodd"
                 d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
               />
-            </svg>
+            </svg> */}
+            Создать
           </button>
         </div>
       </div>

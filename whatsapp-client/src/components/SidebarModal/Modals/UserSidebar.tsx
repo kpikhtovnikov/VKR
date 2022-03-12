@@ -140,7 +140,7 @@ export const UserSidebar = connect(
         )}
 
         <div className={s.section}>
-          <small>Your Name</small>
+          <small>Имя</small>
           <div
             style={
               editName
@@ -210,11 +210,10 @@ export const UserSidebar = connect(
           </div>
         </div>
         <p className={s.info}>
-          This is not your username or pin. This name will be visible to your
-          WhatsApp contacts.
+          Заполните информацию о себе
         </p>
         <div className={s.section}>
-          <small>About</small>
+          <small>Пару слов о себе</small>
           <div
             style={
               editBioBool
@@ -301,7 +300,7 @@ export const UserSidebar = connect(
           </div>
         </div>
         <button onClick={() => initiateLogout()} className={s.logoutBtn}>
-          Logout
+          Выйти
         </button>
       </div>
     );

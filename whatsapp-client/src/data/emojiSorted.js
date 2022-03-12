@@ -1,6 +1,6 @@
 export const emojiList = [
   {
-    title: "Smileys & People",
+    title: "Emotions & People",
     data: [
       {
         name: "grinning",
@@ -1461,7 +1461,7 @@ export const emojiList = [
     ],
   },
   {
-    title: "Animals & Nature",
+    title: "Nature",
     data: [
       {
         name: "see_no_evil",
@@ -2586,7 +2586,7 @@ export const emojiList = [
     ],
   },
   {
-    title: "Food & Drinks",
+    title: "Food",
     data: [
       {
         name: "grapes",
@@ -5911,7 +5911,7 @@ export const emojiList = [
   },
 
   {
-    title: "Shorts",
+    title: "Flags",
     data: [
       {
         name: "flag-ac",

@@ -157,9 +157,11 @@ export const PictureIcon = ({ onClick, className, children }: any) => {
   );
 };
 
-export const AttachmentIcon = ({ onClick, className }: any) => {
+export const AttachmentIcon = ({ children, onClick, className }: any) => {
+  console.log(children)
   return (
     <span onClick={onClick} className={className}>
+      {children}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"

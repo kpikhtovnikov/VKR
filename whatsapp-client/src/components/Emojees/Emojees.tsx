@@ -15,7 +15,7 @@ import { emojiSearchList } from "data/emoje";
 export const Emojees = forwardRef(
   ({ typing, setTyping, setInput }: any, ref: any) => {
     const [presentVisibleCat, setPresentVisibleCat] =
-      useState("Smileys&People");
+      useState("Emotions&People");
     const [query, setQuery] = useState<null | string>(null);
 
     const handleSearch = (query: string) => {
@@ -44,13 +44,13 @@ export const Emojees = forwardRef(
     useEffect(() => {
       //@ts-ignore
       const drawerCats = [
-        "Smileys&People",
-        "Animals&Nature",
-        "Food&Drinks",
+        "Emotions&People",
+        "Nature",
+        "Food",
         "Activity",
         "Travel&Places",
         "Objects",
-        "Shorts",
+        "Flags",
         "Symbols",
       ];
       const intersectionOptions = {
@@ -74,31 +74,31 @@ export const Emojees = forwardRef(
     return (
       <div className={s.emojiContainer}>
         <div className={s.category}>
-          <span
+          {/* <span
             className={presentVisibleCat === "RecentEmojees" ? s.activeSvg : ""}
             onClick={() => handleScrollToCategory("RecentEmojees")}
           >
             <QueryBuilderOutlinedIcon />
-          </span>
+          </span> */}
           <span
             className={
-              presentVisibleCat === "Smileys&People" ? s.activeSvg : ""
+              presentVisibleCat === "Emotions&People" ? s.activeSvg : ""
             }
-            onClick={() => handleScrollToCategory("Smileys&People")}
+            onClick={() => handleScrollToCategory("Emotions&People")}
           >
             <SentimentSatisfiedOutlinedIcon />
           </span>
           <span
             className={
-              presentVisibleCat === "Animals&Nature" ? s.activeSvg : ""
+              presentVisibleCat === "Nature" ? s.activeSvg : ""
             }
-            onClick={() => handleScrollToCategory("Animals&Nature")}
+            onClick={() => handleScrollToCategory("Nature")}
           >
             <PetsIcon />
           </span>
           <span
-            className={presentVisibleCat === "Food&Drinks" ? s.activeSvg : ""}
-            onClick={() => handleScrollToCategory("Food&Drinks")}
+            className={presentVisibleCat === "Food" ? s.activeSvg : ""}
+            onClick={() => handleScrollToCategory("Food")}
           >
             <EmojiFoodBeverageIcon />
           </span>
@@ -121,8 +121,8 @@ export const Emojees = forwardRef(
             <EmojiObjectsOutlinedIcon />
           </span>
           <span
-            className={presentVisibleCat === "Shorts" ? s.activeSvg : ""}
-            onClick={() => handleScrollToCategory("Shorts")}
+            className={presentVisibleCat === "Flags" ? s.activeSvg : ""}
+            onClick={() => handleScrollToCategory("Flags")}
           >
             <PublicOutlinedIcon />
           </span>
@@ -137,7 +137,7 @@ export const Emojees = forwardRef(
         <div className={s.search}>
           <input
             onChange={(e: any) => handleSearch(e.target.value)}
-            placeholder="Search Emoji"
+            placeholder="Поиск на английском языке"
           />
         </div>
         <div id="drawerEmo" className={s.emojeesMain}>

@@ -81,7 +81,7 @@ export const NewMsgSidebar = connect(
               setSidebarModal({
                 type: "addUsersToGroup",
                 params: {
-                  headerTitle: "Profile",
+                  headerTitle: "Создание чата",
                 },
               });
             }}
@@ -99,10 +99,10 @@ export const NewMsgSidebar = connect(
               ></path>
             </svg>
             <div className={s.newG}>
-              <p>New group</p>
+              <p>Новый чат</p>
             </div>
           </div>
-          <p className={s.text}>AUTH CONTACTS</p>
+          <p className={s.text}>Пользователи</p>
           <div className={s.chatsContainer}>
             {Object.entries(authUsers).map((data: any) => {
               return (

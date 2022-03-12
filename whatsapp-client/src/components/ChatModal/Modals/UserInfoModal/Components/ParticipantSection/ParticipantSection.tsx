@@ -70,7 +70,7 @@ export const ParticipantSection = connect(
 
     return (
       <div className={s.participants}>
-        <p className="chatModalSectionTitle">Participants</p>
+        <p className="chatModalSectionTitle">Участники</p>
         <div className={s.chatsContainer}>
           {Object.entries(activeChat.chatInfo.participants)
             .filter(

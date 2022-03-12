@@ -3,6 +3,7 @@ import * as mongodb from "mongodb";
 const MongoClient = mongodb.MongoClient;
 // const mongoURI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@whatsapp-clone-mongodb.bgdrv.mongodb.net/whatsapp-clone?retryWrites=true&w=majority`;
 const mongoURI = `mongodb+srv://test:TQf807E0w7hjXdXq@cluster0.rwvpw.mongodb.net/Cluster0?retryWrites=true&w=majority`
+  // const mongoURI = 'mongodb://localhost:27017';
 
 // mongo db instance
 let db: any;
@@ -14,7 +15,7 @@ export const inititalizeMongoDb = async () => {
   
   try {
     const client = await MongoClient.connect(mongoURI);
-    // console.log(client)
+    console.log(client)
     db = client;
     return db;
   } catch {

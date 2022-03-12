@@ -10,7 +10,7 @@ export const MediaSection = connect(passStateToProps)(({ activeChat }: any) => {
   return (
     <div className={s.mediaScreen}>
       <div className={s.head}>
-        <p className="chatModalSectionTitle">Media, Links and Docs</p>
+        <p className="chatModalSectionTitle">Файлы</p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 10 21"

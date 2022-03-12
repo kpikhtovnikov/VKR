@@ -110,13 +110,13 @@ export const ChatContainerHead = connect(
             <small>
               {otherFriend
                 ? allUsers[otherFriend.objectId]?.status
-                  ? "Online"
-                  : `Last seen at ${formatTime(
+                  ? "Онлайн"
+                  : `Был в сети ${formatTime(
                       allUsers[otherFriend.objectId]?.lastSeen
                     )}, ${new Date(allUsers[otherFriend.objectId]?.lastSeen)
                       .toString()
                       .slice(0, 16)}`
-                : "Info"}
+                : "Чат"}
             </small>
           </div>
         </div>

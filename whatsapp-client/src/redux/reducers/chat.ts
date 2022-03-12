@@ -10,6 +10,7 @@ const initialState: ChatStateType = {
   activeChat: null,
   loading: true,
   chat: {},
+  search: {},
 };
 
 export const chatSlice = createSlice({

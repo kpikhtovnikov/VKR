@@ -81,7 +81,7 @@ export const AttachmentModal = connect(
       >
         <header>
           <CloseIcon onClick={closeAttachmentModal} />
-          <strong>Preview</strong>
+          <strong>Предварительный просмотр</strong>
         </header>
         <div className={s.previewInFocus}>
           <FilePreview file={fileInPreview[0]} />
