@@ -25,6 +25,8 @@ export const CallerInfo = connect(
     useState(false);
 
   const onClose = () => {
+    console.log(reverseAttachmentModalAnimation)
+    // setReverseAttachmentModalAnimation(true);
     if (reverseAttachmentModalAnimation) {
       rejectCall();
       setReverseAttachmentModalAnimation(false);
@@ -32,7 +34,7 @@ export const CallerInfo = connect(
   };
 
   const acceptCall = () => {
-    // console.log(callerInfo)
+    console.log(callerInfo)
     setRoomModal({
       peerId: callerInfo.peerId,
       callBy: null,
@@ -40,6 +42,9 @@ export const CallerInfo = connect(
       acceptedCall: true,
     });
     callConnected();
+  };
+  const cancelCall = () => {
+    setReverseAttachmentModalAnimation(true)
   };
   //
   return callerInfo?.active ? (
@@ -64,7 +69,7 @@ export const CallerInfo = connect(
               <VideocamIcon onClick={acceptCall} />
             </span>
             <span>
-              <CallEndIcon />
+              <CallEndIcon onClick={cancelCall}/>
             </span>
           </div>
         </div>
