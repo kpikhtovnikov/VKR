@@ -22,19 +22,19 @@ export const ActiveChatInfo = connect(passStateToProps)(
         fixedDropdown={fixedDropdown}
       >
         <div className={s.list}>
-          <p>Info</p>
+          <p>Информация о чате</p>
         </div>
-        <div className={s.list}>
+        {/* <div className={s.list}>
           <p>Select messages</p>
         </div>
         <div className={s.list}>
           <p>Mute notifications</p>
+        </div> */}
+        <div className={s.list}>
+          <p>Очистить сообщения</p>
         </div>
         <div className={s.list}>
-          <p>Clear messages</p>
-        </div>
-        <div className={s.list}>
-          <p>Delete chat</p>
+          <p>Удалить чат</p>
         </div>
       </DropdownAnimation>
     );

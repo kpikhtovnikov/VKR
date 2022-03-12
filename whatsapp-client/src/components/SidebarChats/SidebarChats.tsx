@@ -114,7 +114,7 @@ export const SidebarChats = connect(
                 ? allUsers[otherFriend.objectId]?.displayName
                 : data.chatInfo?.name}
             </p>
-            {<p className={s.time}>Thursday</p>}
+            {<p className={s.time}>Четверг</p>}
           </div>
           <div>
             <MsgPreview

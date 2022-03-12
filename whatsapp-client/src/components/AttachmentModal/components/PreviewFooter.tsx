@@ -156,7 +156,7 @@ export const PreviewFooter = connect(
             <p>
               <AddIcon />
             </p>
-            <small>ADD FILE</small>
+            <small>Ещё файл</small>
           </div>
         </div>
       </div>
