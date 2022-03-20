@@ -27,10 +27,13 @@ export const sendRefreshToken = async (req: any, res: any) => {
     });
   }
 
-  console.log(new ObjectId(payload._id))
+  // console.log(new ObjectId(payload._id))
+  
   const { _id }: any = await db
     .collection("googleAuthUsers")
     .findOne({ _id: new ObjectId(payload._id) });
+
+  // const { _id }: any = null;
 
   if (!_id) {
     return res.status(401).send({

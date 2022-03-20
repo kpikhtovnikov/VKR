@@ -10,6 +10,7 @@ import { handleNewChat } from "./controllers/handleNewChat.controller";
 import { sendRefreshToken } from "./controllers/sendRefreshToken.controller";
 import { googlelogin } from "./controllers/googleLogin.controller";
 import { logout } from "./controllers/logout.controller";
+import { handleDeleteChat } from "./controllers/handleDeleteChat.controller";
 const router: express.Router = express.Router();
 
 // temp upload location for files
@@ -51,5 +52,6 @@ router.get("/resources/:fileType/:key", handleGetResource);
 router.post("/create-new-group", isAuthREST, handleNewGroup);
 
 router.post("/create-new-chat", isAuthREST, handleNewChat);
+router.put("/delete-chat", isAuthREST, handleDeleteChat);
 
 export default router;

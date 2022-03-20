@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { Activity } from "../Activity/Activity";
 import s from "./chatContainerFooterStyles.module.scss";
 import SendIcon from "@material-ui/icons/Send";
+import { DropdownAnimationUp } from "animations/dropdown/DropdownAnimationUp";
 import {
   AttachmentIcon,
   AvatarIcon,
@@ -32,6 +33,10 @@ import { sendMsgStart } from "redux/reducers/chat";
 import { parseAttachmentFiles } from "utils/parseAttachementFiles";
 import { setGlobalModal } from "redux/reducers/globalModal";
 
+// const passStateToProps = ({ dropDownMenu }: any) => ({
+//   dropMenu: dropDownMenu.dropDown,
+// });
+
 const passStateFromProps = ({
   chatState,
   attachmentModal,
@@ -54,7 +59,8 @@ const passDispatchToProps = (dispatch: any) => ({
 
 export const ChatContainerFooter = connect(
   passStateFromProps,
-  passDispatchToProps
+  passDispatchToProps,
+  // passStateToProps
 )(
   ({
     setAttachmentModal,
@@ -66,8 +72,16 @@ export const ChatContainerFooter = connect(
     sendMessage,
     setGlobalModal,
     startUploadingAttachments,
+    dropMenu
   }: any) => {
     const [height, setHeight] = useState(0);
+    const sizeParam = {
+      height: 170,
+      width: 140,
+      yOffset: 175,
+      xOffset: 142,
+    };
+    
     const [activity, setActivity] = useState<boolean | string>(false);
     const [recording, setRecording] = useState(false);
     const [attachmentMenu, setAttachmentMenu] = useState(false);
@@ -281,6 +295,22 @@ export const ChatContainerFooter = connect(
                   accept="image/png, .docx, .doc, .pdf, .zip, .rar, video/mp4"
                 />
               </AttachmentIcon> */}
+              {/* <DropdownAnimationUp
+                  sizeParam={sizeParam}
+                  locationParams={dropMenu.position}
+                  className={s.dropDown}
+                  fixedDropdown={true}
+                >
+                  <div className={s.list}>
+                    <p>Информация о чате</p>
+                  </div>
+                  <div className={s.list}>
+                    <p>Очистить сообщения</p>
+                  </div>
+                  <div className={s.list}>
+                    <p>Удалить чат</p>
+                  </div>
+                </DropdownAnimationUp> */}
             </div>
           </div>
           <div

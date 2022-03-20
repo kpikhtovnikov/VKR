@@ -11,6 +11,7 @@ import {
   onChatsLoadComplete,
   sendMsgStart,
   setActiveChat,
+  setSearch
 } from "../reducers/chat";
 import store from "../store";
 import { globalAxios } from "config/globalAxios";
@@ -88,6 +89,24 @@ export function* initSendMsgStart() {
       // chat already existed, sending message
       socket.emit("iTextMessage", action.payload);
     }
+  });
+}
+
+//delete chat
+export function* deleteChat() {
+  yield takeLatest(getInitialChats.type, function* () {
+    //@ts-ignore
+    const _all = yield call(getInitialChatData);
+    //@ts-ignore
+    const chats = yield call(getAllMessages, _all);
+    const chatsObj = chats.reduce((result: any, item: any, index: number) => {
+      result[item[0]._id] = {
+        chatInfo: item[0],
+        messages: item[1],
+      };
+      return result;
+    }, {});
+    yield put(onChatsLoadComplete(chatsObj));
   });
 }
 

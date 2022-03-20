@@ -2,10 +2,6 @@ import s from "./sidebarHeadStyles.module.scss";
 import { connect } from "react-redux";
 import { setDropDown } from "redux/reducers/dropDown";
 import { setSidebarModal } from "redux/reducers/sidebarChatModal";
-import VideoPage from "components/videoPage/videoPage";
-import { useState } from "react";
-import { Routes ,Route, Link } from 'react-router-dom';
-// import { setAuthState } from "redux/reducers/auth";
 import { SidebarSearch } from "../SidebarSearch/SidebarSearch";
 
 
@@ -32,19 +28,6 @@ export const SidebarHead = connect(
     setPersonalSettingsDropdown,
     setSidebarModal,
   }: any) => {
-    // <Route path='/roster' element={VideoPage}/>
-    const [video, setVideo] = useState(false);
-
-    const handleVideo = () => {
-      // console.log(video)
-      // if (video) {
-      //   setVideo(true)
-      // } else {
-      //   setVideo(false)
-      // }
-      setVideo(!video)
-      console.log(video)
-    }
 
     const toggleDropdown = (e: any) => {
       if (dropDown.type === "personalSetting") {
@@ -55,12 +38,40 @@ export const SidebarHead = connect(
         setPersonalSettingsDropdown({
           type: "personalSetting",
           position: {
-            x: e.target.getBoundingClientRect().left - 110,
-            y: e.target.getBoundingClientRect().top + 34,
+            // x: e.target.getBoundingClientRect().left - 110,
+            // y: e.target.getBoundingClientRect().top + 34,
+            x: e.target.getBoundingClientRect().left + 10,
+            y: e.target.getBoundingClientRect().top + 35,
           },
           params: {},
         });
       }
+    };
+
+    const toggleDropdown2 = (e: any) => {
+      if (dropDown.type === "addChat") {
+        setPersonalSettingsDropdown({
+          type: "",
+        });
+      } else {
+        setPersonalSettingsDropdown({
+          type: "addChat",
+          position: {
+            // x: e.target.getBoundingClientRect().left - 110,
+            // y: e.target.getBoundingClientRect().top + 34,
+            x: e.target.getBoundingClientRect().left + 10,
+            y: e.target.getBoundingClientRect().top + 35,
+          },
+          params: {},
+        });
+      }
+
+      // setSidebarModal({
+      //       type: "newMsgSidebar",
+      //       params: {
+      //         headerTitle: "Создание чата",
+      //       },
+      // });
     };
 
     return (
@@ -88,33 +99,16 @@ export const SidebarHead = connect(
         </span>
         <SidebarSearch />
         <div className={s.headControls}>
-        {/* <Link to='/videoPage'>
           <span
-          onClick={handleVideo}
-          className="icons">
-            <svg
-              id="ee51d023-7db6-4950-baf7-c34874b80976"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-            >
-              <path
-                fill="currentColor"
-                d="M12 20.664a9.163 9.163 0 0 1-6.521-2.702.977.977 0 0 1 1.381-1.381 7.269 7.269 0 0 0 10.024.244.977.977 0 0 1 1.313 1.445A9.192 9.192 0 0 1 12 20.664zm7.965-6.112a.977.977 0 0 1-.944-1.229 7.26 7.26 0 0 0-4.8-8.804.977.977 0 0 1 .594-1.86 9.212 9.212 0 0 1 6.092 11.169.976.976 0 0 1-.942.724zm-16.025-.39a.977.977 0 0 1-.953-.769 9.21 9.21 0 0 1 6.626-10.86.975.975 0 1 1 .52 1.882l-.015.004a7.259 7.259 0 0 0-5.223 8.558.978.978 0 0 1-.955 1.185z"
-              ></path>
-            </svg>
-          </span>
-          </Link> */}
-          <span
-            onClick={() => {
-              setSidebarModal({
-                type: "newMsgSidebar",
-                params: {
-                  headerTitle: "Создание чата",
-                },
-              });
-            }}
+            // onClick={() => {
+            //   setSidebarModal({
+            //     type: "newMsgSidebar",
+            //     params: {
+            //       headerTitle: "Создание чата",
+            //     },
+            //   });
+            // }}
+            onClick={toggleDropdown2}
             className="icons"
           >
             <svg
@@ -129,7 +123,7 @@ export const SidebarHead = connect(
               ></path>
             </svg>
           </span>
-          {/* <span
+          <span
             style={
               dropDown.type === "personalSetting"
                 ? {
@@ -154,7 +148,7 @@ export const SidebarHead = connect(
                 d="M12 7a2 2 0 1 0-.001-4.001A2 2 0 0 0 12 7zm0 2a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 9zm0 6a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 15z"
               ></path>
             </svg>
-          </span> */}
+          </span>
         </div>
       </div>
     );

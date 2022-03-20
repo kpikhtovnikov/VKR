@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import s from "./chatStyles.module.scss";
 import { Avatar } from "@material-ui/core";
@@ -8,11 +8,13 @@ import { setDropDown } from "redux/reducers/dropDown";
 import { setActiveChat } from "redux/reducers/chat";
 import { setChatContainerModal } from "redux/reducers/chatContainerModal";
 import { SidebarVoices } from "components/SidebarVoices/SidebarVoices";
+import Fuse from 'fuse.js';
 
 const passStateToProps = ({ chatState, authState }: any) => ({
   activeChat: chatState.chat[chatState?.activeChat],
   allUsers: chatState.authUsers,
   myObjId: authState.auth.objectId,
+  chatState
 });
 
 const passDispatchToProps = (dispatch: any) => ({
@@ -33,7 +35,35 @@ export const SidebarChats = connect(
     allUsers,
     myObjId,
     activeChat,
+    chatState
   }: any) => {
+
+    const otherFriend =
+      data.chatInfo.type === "chat"
+        ? data.chatInfo.participants.find((e: any) => e.objectId !== myObjId)
+        : null;
+
+    // const fuseDisplayName = new Fuse(allUsers[otherFriend.objectId], { keys: [ 'displayName' ] });
+    const fuseChatInfoName = new Fuse(data, { keys: [ 'chatInfo' ] });
+    // let resultDisplayName = []
+    let resultChatInfoName = []
+    useEffect(() => {
+      // console.log(chatState.search)
+      // console.log(chatState.chat)
+      // console.log(data)
+      // const t1 = allUsers[otherFriend.objectId]?.displayName.includes((el: any) =>
+      //   chatState.search
+      // )
+      // console.log(t1)
+      // if(allUsers[otherFriend.objectId]?.displayName.filter((el: any) => (el: any) => {
+
+      // }) || data.chatInfo?.name) {
+      // resultDisplayName = fuseDisplayName.search(chatState.search)
+      resultChatInfoName = fuseChatInfoName.search(chatState.search)
+      // console.log(resultDisplayName)
+      console.log(resultChatInfoName)
+    }, [chatState])
+
     const handleDropMenuClicks = (e: any, type: string) => {
       e.stopPropagation();
       setDropMenu({
@@ -61,10 +91,9 @@ export const SidebarChats = connect(
 
     const [expandMore, setExpandMore] = useState(false);
 
-    const otherFriend =
-      data.chatInfo.type === "chat"
-        ? data.chatInfo.participants.find((e: any) => e.objectId !== myObjId)
-        : null;
+    // const isSearch = () => {
+    //   if
+    // }
 
     return (
       <div
@@ -110,9 +139,17 @@ export const SidebarChats = connect(
         <span className={s.chatInfo}>
           <div>
             <p>
-              {otherFriend
-                ? allUsers[otherFriend.objectId]?.displayName
-                : data.chatInfo?.name}
+              {/* {!chatState.search.length ? (
+                otherFriend ? allUsers[otherFriend.objectId]?.displayName
+                : data.chatInfo?.name
+                ) :
+                (
+                  null
+                )
+              } */}
+              { otherFriend ? allUsers[otherFriend.objectId]?.displayName
+                : data.chatInfo?.name
+              }
             </p>
             {<p className={s.time}>Четверг</p>}
           </div>

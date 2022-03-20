@@ -25,6 +25,12 @@ export const chatSlice = createSlice({
     onChatsLoadComplete: (state, action: PayloadAction<any>) => {
       state.loading = false;
       state.chat = action.payload;
+      console.log(state.chat)
+    },
+
+    setSearch: (state, action: PayloadAction<any>) => {
+      state.search = action.payload
+      console.log(state.search)
     },
 
     setTotalAuthUsers: (state, action: PayloadAction<any>) => {
@@ -237,5 +243,6 @@ export const {
   groupInfoUpdateSuccessfull,
   initGroupInfoUpdate,
   replaceDownloadedVideoURL,
+  setSearch
 } = chatSlice.actions;
 export default chatSlice;

@@ -4,12 +4,14 @@ import s from "../sidebarModal.module.scss";
 import { connect } from "react-redux";
 import { createNewChat, setActiveChat } from "redux/reducers/chat";
 import { setSidebarModal } from "redux/reducers/sidebarChatModal";
+import { setDropDown } from "redux/reducers/dropDown";
 
-const passStateToProps = ({ chatState, authState }: any) => ({
+const passStateToProps = ({ dropDownMenu, chatState, authState }: any) => ({
   authUsers: chatState.authUsers,
   activeChat: chatState.chat[chatState?.activeChat],
   guestUsers: chatState.guestUsers,
   chats: chatState.chat,
+  dropDown: dropDownMenu.dropDown,
   authState,
 });
 
@@ -18,6 +20,8 @@ const passDispatchToProps = (dispatch: any) => ({
   createNewChat: (payload: any) => dispatch(createNewChat(payload)),
   setSidebarModal: (sidebarModal: any) =>
     dispatch(setSidebarModal(sidebarModal)),
+  setPersonalSettingsDropdown: (dropDown: any) =>
+    dispatch(setDropDown(dropDown)),
 });
 
 export const NewMsgSidebar = connect(
@@ -33,6 +37,8 @@ export const NewMsgSidebar = connect(
     closeModal,
     createNewChat,
     setSidebarModal,
+    setPersonalSettingsDropdown,
+    dropDown
   }: any) => {
     const handleOnClick = (data: any) => {
       const doesChatExist: any = Object.entries(chats).find((chat: any) => {
@@ -72,19 +78,40 @@ export const NewMsgSidebar = connect(
       }
     };
 
+    const toggleDropdown2 = (e: any) => {
+      if (dropDown.type === "addToGroup") {
+        setPersonalSettingsDropdown({
+          type: "",
+        });
+      } else {
+        setPersonalSettingsDropdown({
+          type: "addToGroup",
+          position: {
+            // x: e.target.getBoundingClientRect().left - 110,
+            // y: e.target.getBoundingClientRect().top + 34,
+            x: e.target.getBoundingClientRect().left - 55,
+            y: e.target.getBoundingClientRect().top - 68
+          },
+          params: {},
+        });
+      }
+    }
+
+
     return (
       <div className={s.sidebarModalBody}>
         <SidebarSearch />
         <div className={s.allChats}>
           <div
-            onClick={() => {
-              setSidebarModal({
-                type: "addUsersToGroup",
-                params: {
-                  headerTitle: "Создание чата",
-                },
-              });
-            }}
+            // onClick={() => {
+            //   setSidebarModal({
+            //     type: "addUsersToGroup",
+            //     params: {
+            //       headerTitle: "Создание чата",
+            //     },
+            //   });
+            // }}
+            onClick={toggleDropdown2}
             className={s.newGroup}
           >
             <svg
@@ -130,25 +157,6 @@ export const NewMsgSidebar = connect(
               );
             })}
           </div>
-          {/* <p className={s.text}>GUEST CONTACTS</p>
-          <div className={s.chatsContainer}>
-            {Object.entries(guestUsers).map((data: any) => {
-              return (
-                <div className={s.availableUsers} key={data[0]}>
-                  <div className={s.avatar}>
-                    {data[1]?.status ? (
-                      <div className={s.activeIndicater}></div>
-                    ) : null}
-                    <Avatar src={data[1].avatar} alt="sidebar-chat-avatar" />
-                  </div>
-                  <span>
-                    <p>{data[1].displayName}</p>
-                    <small>{data[1].about}</small>
-                  </span>
-                </div>
-              );
-            })}
-          </div> */}
         </div>
       </div>
     );
