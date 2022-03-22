@@ -13,6 +13,7 @@ const passStateToProps = ({ dropDownMenu, chatState, authState }: any) => ({
   chats: chatState.chat,
   dropDown: dropDownMenu.dropDown,
   authState,
+  chatState
 });
 
 const passDispatchToProps = (dispatch: any) => ({
@@ -32,6 +33,7 @@ export const NewMsgSidebar = connect(
     authState,
     authUsers,
     chats,
+    chatState,
     setActiveChat,
     activeChat,
     closeModal,
@@ -40,6 +42,16 @@ export const NewMsgSidebar = connect(
     setPersonalSettingsDropdown,
     dropDown
   }: any) => {
+
+    let users = {
+      'objectId': 0
+    }
+
+    if(authUsers) {
+      console.log(authUsers)
+      users = authUsers
+    }
+
     const handleOnClick = (data: any) => {
       const doesChatExist: any = Object.entries(chats).find((chat: any) => {
         const refChat = chat[1].chatInfo;
@@ -133,6 +145,8 @@ export const NewMsgSidebar = connect(
           <div className={s.chatsContainer}>
             {Object.entries(authUsers).map((data: any) => {
               return (
+                <div>
+                { data[1].displayName.includes(chatState.search) ?
                 <div
                   onClick={() => handleOnClick(data)}
                   className={s.availableUsers}
@@ -153,6 +167,9 @@ export const NewMsgSidebar = connect(
                     <p>{data[1].displayName}</p>
                     <small>{data[1].about}</small>
                   </span>
+                </div>
+                : null
+                }
                 </div>
               );
             })}

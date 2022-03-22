@@ -43,26 +43,26 @@ export const SidebarChats = connect(
         ? data.chatInfo.participants.find((e: any) => e.objectId !== myObjId)
         : null;
 
-    // const fuseDisplayName = new Fuse(allUsers[otherFriend.objectId], { keys: [ 'displayName' ] });
-    const fuseChatInfoName = new Fuse(data, { keys: [ 'chatInfo' ] });
-    // let resultDisplayName = []
-    let resultChatInfoName = []
-    useEffect(() => {
-      // console.log(chatState.search)
-      // console.log(chatState.chat)
-      // console.log(data)
-      // const t1 = allUsers[otherFriend.objectId]?.displayName.includes((el: any) =>
-      //   chatState.search
-      // )
-      // console.log(t1)
-      // if(allUsers[otherFriend.objectId]?.displayName.filter((el: any) => (el: any) => {
+    let friend = {
+      'objectId': 0
+    }
 
-      // }) || data.chatInfo?.name) {
-      // resultDisplayName = fuseDisplayName.search(chatState.search)
-      resultChatInfoName = fuseChatInfoName.search(chatState.search)
-      // console.log(resultDisplayName)
-      console.log(resultChatInfoName)
-    }, [chatState])
+    let dataObject = {
+      'chatInfo': {
+        'id': 0,
+        'name': ''
+      },
+      'messages': []
+    }
+
+    if(otherFriend) {
+      friend = otherFriend
+    }
+    if(data) {
+      dataObject = data
+    }
+
+
 
     const handleDropMenuClicks = (e: any, type: string) => {
       e.stopPropagation();
@@ -91,11 +91,9 @@ export const SidebarChats = connect(
 
     const [expandMore, setExpandMore] = useState(false);
 
-    // const isSearch = () => {
-    //   if
-    // }
-
     return (
+      <div>
+      { (allUsers[friend.objectId]?.displayName?.includes(chatState.search) || dataObject?.chatInfo?.name?.includes(chatState.search)) ?
       <div
         onMouseOver={() => setExpandMore(true)}
         onMouseLeave={() => setExpandMore(false)}
@@ -151,7 +149,9 @@ export const SidebarChats = connect(
                 : data.chatInfo?.name
               }
             </p>
-            {<p className={s.time}>Четверг</p>}
+            {/* {<p className={s.time}>Четверг</p>} */}
+            {<p className={s.time}>{otherFriend ? allUsers[otherFriend.objectId]?.timestamp
+                : data.chatInfo?.modifiedOn}</p>}
           </div>
           <div>
             <MsgPreview
@@ -169,6 +169,9 @@ export const SidebarChats = connect(
             ) : null} */}
           </div>
         </span>
+      </div>
+      : null
+      }
       </div>
     );
   }
