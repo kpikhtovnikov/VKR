@@ -10,8 +10,7 @@ import {
   newGroupCreated,
   onChatsLoadComplete,
   sendMsgStart,
-  setActiveChat,
-  setSearch
+  setActiveChat
 } from "../reducers/chat";
 import store from "../store";
 import { globalAxios } from "config/globalAxios";

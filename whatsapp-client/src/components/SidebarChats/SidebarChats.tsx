@@ -62,6 +62,9 @@ export const SidebarChats = connect(
       dataObject = data
     }
 
+    console.log(data)
+    console.log(allUsers)
+
 
 
     const handleDropMenuClicks = (e: any, type: string) => {
@@ -93,7 +96,7 @@ export const SidebarChats = connect(
 
     return (
       <div>
-      { (allUsers[friend.objectId]?.displayName?.includes(chatState.search) || dataObject?.chatInfo?.name?.includes(chatState.search)) ?
+      { (!chatState.chatSearch.length || allUsers[friend.objectId]?.displayName?.includes(chatState.chatSearch) || dataObject?.chatInfo?.name?.includes(chatState.chatSearch)) ?
       <div
         onMouseOver={() => setExpandMore(true)}
         onMouseLeave={() => setExpandMore(false)}
@@ -150,7 +153,7 @@ export const SidebarChats = connect(
               }
             </p>
             {/* {<p className={s.time}>Четверг</p>} */}
-            {<p className={s.time}>{otherFriend ? allUsers[otherFriend.objectId]?.timestamp
+            {<p className={s.time}>{otherFriend ? allUsers[otherFriend.objectId]?.lastSeen
                 : data.chatInfo?.modifiedOn}</p>}
           </div>
           <div>

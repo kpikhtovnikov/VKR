@@ -5,6 +5,8 @@ import { createNewGroup, setActiveChat } from "redux/reducers/chat";
 import { useState } from "react";
 import { ObjectID } from "bson";
 import { newGroupIcon } from "./newGroupIcon";
+import { SidebarSearch } from "components/SidebarSearch/SidebarSearch";
+import { searchType } from "constants/searchText";
 
 const passStateToProps = ({ chatState, authState }: any) => ({
   authUsers: chatState.authUsers,
@@ -84,7 +86,9 @@ export const AddUsersToGroup = connect(
 
     return (
       <div className={s.sidebarModalBody}>
+        {/* <SidebarSearch typeSearch={searchType.newUserSearch}/> */}
         <div className={`${s.allChats} ${s.adduserstog}`}>
+        <SidebarSearch typeSearch={searchType.newUserSearch}/>
           <div className={s.newGroupInfo}>
             <div className={s.addedUserInfo}>
               <div className={s.selectedUserDiv}>

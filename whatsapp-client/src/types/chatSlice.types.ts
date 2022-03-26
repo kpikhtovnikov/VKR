@@ -1,4 +1,5 @@
 import { AuthUserType } from "./authSlice.types";
+import { searchType } from "constants/searchText";
 
 export interface ParticipantsType {
   objectId: string;
@@ -43,4 +44,7 @@ export interface ChatStateType {
   loading: boolean;
   chat: { [k: string]: ChatType };
   search: { [k: string]: ChatType };
+  chatSearch: {};
+  userSearch: {}
+  newUserSearch: {}
 }

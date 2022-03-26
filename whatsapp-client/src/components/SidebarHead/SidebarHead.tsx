@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { setDropDown } from "redux/reducers/dropDown";
 import { setSidebarModal } from "redux/reducers/sidebarChatModal";
 import { SidebarSearch } from "../SidebarSearch/SidebarSearch";
+import { searchType } from "constants/searchText";
 
 
 const passDispatchToProps = (dispatch: any) => ({
@@ -97,7 +98,7 @@ export const SidebarHead = connect(
             </div>
           )}
         </span>
-        <SidebarSearch />
+        <SidebarSearch typeSearch={searchType.chatSearch}/>
         <div className={s.headControls}>
           <span
             // onClick={() => {

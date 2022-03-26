@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { createNewChat, setActiveChat } from "redux/reducers/chat";
 import { setSidebarModal } from "redux/reducers/sidebarChatModal";
 import { setDropDown } from "redux/reducers/dropDown";
+import { searchType } from "constants/searchText";
 
 const passStateToProps = ({ dropDownMenu, chatState, authState }: any) => ({
   authUsers: chatState.authUsers,
@@ -112,7 +113,7 @@ export const NewMsgSidebar = connect(
 
     return (
       <div className={s.sidebarModalBody}>
-        <SidebarSearch />
+        <SidebarSearch typeSearch={searchType.userSearch}/>
         <div className={s.allChats}>
           <div
             // onClick={() => {
@@ -146,7 +147,7 @@ export const NewMsgSidebar = connect(
             {Object.entries(authUsers).map((data: any) => {
               return (
                 <div>
-                { data[1].displayName.includes(chatState.search) ?
+                { !chatState.userSearch.length || data[1].displayName.includes(chatState.userSearch) ?
                 <div
                   onClick={() => handleOnClick(data)}
                   className={s.availableUsers}

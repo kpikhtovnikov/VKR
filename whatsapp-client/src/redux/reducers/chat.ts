@@ -3,6 +3,7 @@ import colors from "data/colors.json";
 import { ObjectID } from "bson";
 import { ChatStateType } from "types/chatSlice.types";
 import { AuthUserType } from "types/authSlice.types";
+import { searchType } from "constants/searchText";
 
 const initialState: ChatStateType = {
   authUsers: {},
@@ -11,6 +12,9 @@ const initialState: ChatStateType = {
   loading: true,
   chat: {},
   search: {},
+  chatSearch: {},
+  userSearch: {},
+  newUserSearch: {},
 };
 
 export const chatSlice = createSlice({
@@ -31,6 +35,18 @@ export const chatSlice = createSlice({
     setSearch: (state, action: PayloadAction<any>) => {
       state.search = action.payload
       console.log(state.search)
+    },
+
+    setChatSearch: (state, action: PayloadAction<any>) => {
+      state.chatSearch = action.payload
+    },
+
+    setUserSearch: (state, action: PayloadAction<any>) => {
+      state.userSearch = action.payload
+    },
+
+    setNewUserSearch: (state, action: PayloadAction<any>) => {
+      state.newUserSearch = action.payload
     },
 
     setTotalAuthUsers: (state, action: PayloadAction<any>) => {
@@ -243,6 +259,9 @@ export const {
   groupInfoUpdateSuccessfull,
   initGroupInfoUpdate,
   replaceDownloadedVideoURL,
-  setSearch
+  setSearch,
+  setChatSearch,
+  setUserSearch,
+  setNewUserSearch
 } = chatSlice.actions;
 export default chatSlice;
