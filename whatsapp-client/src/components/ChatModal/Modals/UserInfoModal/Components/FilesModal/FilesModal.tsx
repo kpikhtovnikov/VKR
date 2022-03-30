@@ -1,15 +1,11 @@
 import s from "../../chatModal.module.scss";
 import { connect } from "react-redux";
-import { AvatarSection } from "./Components/AvatarSection/AvatarSection";
-import { DescSection } from "./Components/DescSection/DescSection";
-import { GeneralSettingsSection } from "./Components/GeneralSettingsSection/generalSettingsSection";
-import { MediaSection } from "./Components/MediaSection/MediaSection";
-import { ParticipantSection } from "./Components/ParticipantSection/ParticipantSection";
+import { AvatarSection } from "../AvatarSection/AvatarSection";
+import { DescSection } from "../DescSection/DescSection";
+import { GeneralSettingsSection } from "../GeneralSettingsSection/generalSettingsSection";
+import { MediaSection } from "../MediaSection/MediaSection";
+import { ParticipantSection } from "../ParticipantSection/ParticipantSection";
 import { setChatContainerModal } from "redux/reducers/chatContainerModal";
-import { useEffect, useState } from "react";
-import { deleteChat } from "redux/reducers/chat";
-import { Button, Modal } from 'react-bootstrap';
-import { DeleteModal } from "./DeleteModal";
 
 const passStateToProps = ({ chatModal, chatState, authState }: any) => ({
   chatContainerModal: chatModal.modal,
@@ -20,42 +16,21 @@ const passStateToProps = ({ chatModal, chatState, authState }: any) => ({
 
 const passDispatchToProps = (dispatch: any) => ({
   setChatContainerModal: (modal: any) => dispatch(setChatContainerModal(modal)),
-  deleteChatInfo: (payload: any) => dispatch(deleteChat(payload)),
 });
-
 
 export const UserInfoModal = connect(
   passStateToProps,
   passDispatchToProps
-)(({ activeChat, setReverseAnimation, myObjId, allUsers, deleteChatInfo }: any) => {
-
-
+)(({ activeChat, setReverseAnimation, myObjId, allUsers }: any) => {
   const otherFriend =
-    activeChat?.chatInfo?.type === "chat"
-      ? activeChat?.chatInfo?.participants.find((e: any) => {
+    activeChat.chatInfo.type === "chat"
+      ? activeChat.chatInfo.participants.find((e: any) => {
           console.log(e);
           return e.objectId !== myObjId;
         })
       : null;
 
-  // console.log(otherFriend)
-  // useEffect(() => {
-  //   console.log(otherFriend)
-  // }, [otherFriend])
-
-  const deleteChatModal = (el: any) => {
-    console.log(activeChat)
-    // deleteChatInfo({
-    //   _id: activeChat,
-    //   type: activeChat.chatInfo.type,
-    //   refId: activeChat.chatInfo._id,
-    //   clientSide: activeChat.chatInfo.clientSide,
-    // });
-  }
-
   return (
-    <div>
-      <DeleteModal />
     <div className={s.userInfoModal}>
       <div className={s.modalHead}>
         <svg
@@ -79,7 +54,6 @@ export const UserInfoModal = connect(
           desc={activeChat?.chatInfo?.desc}
         />
         <MediaSection />
-        {/* <DeleteModal /> */}
         {/* {otherFriend ? null : <GeneralSettingsSection />} */}
         {otherFriend ? null : (
           <ParticipantSection onClose={() => setReverseAnimation(true)} />
@@ -101,16 +75,8 @@ export const UserInfoModal = connect(
           </div>
         )}
 
-        <div 
-        className={s.report}
-        // onClick={()=> {
-        //   alert(1)
-        //   deleteChat(otherFriend)
-        // }}
-        onClick={deleteChatModal}
-        >
+        <div className={s.report}>
           <svg
-            // onClick={()=> alert(1)}
             xmlns="http://www.w3.org/2000/svg"
             width="16"
             height="16"
@@ -122,7 +88,6 @@ export const UserInfoModal = connect(
           <p>{otherFriend ? "Удалить чат" : "Удалить чат"}</p>
         </div>
       </div>
-    </div>
     </div>
   );
 });

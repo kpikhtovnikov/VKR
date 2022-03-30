@@ -5,6 +5,7 @@ import { ChatInfoDropdown } from "./Components/ChatInfoDropdown";
 import { connect } from "react-redux";
 import { PersonalSettingDropdown } from "./Components/PersonalSettingDropdown";
 import { AddChatDropdown } from "./Components/AddChatDropdown";
+import { FilesDropDown } from "components/Dropmenu/Components/FilesDropDown";
 
 const passStateToProps = ({ dropDownMenu }: any) => ({
     dropMenu: dropDownMenu.dropDown,
@@ -25,9 +26,12 @@ export const DropMenu = connect(passStateToProps)(({ dropMenu }: any) => {
         case "personalSetting":
             return <PersonalSettingDropdown />;
         case "addChat":
-            return <AddChatDropdown />;
-        case "addToGroup":
+            // return <AddChatDropdown />;
             return <AddChatDropdown isNewGroup={true}/>;
+        case "addFiles":
+            return <FilesDropDown />;
+        // case "addToGroup":
+        //     return <AddChatDropdown isNewGroup={true}/>;
         default:
             return (
                 <div

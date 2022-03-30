@@ -52,6 +52,7 @@ router.get("/resources/:fileType/:key", handleGetResource);
 router.post("/create-new-group", isAuthREST, handleNewGroup);
 
 router.post("/create-new-chat", isAuthREST, handleNewChat);
-router.put("/delete-chat", isAuthREST, handleDeleteChat);
+router.delete("/delete-chat", isAuthREST, handleDeleteChat);
+// router.put("/delete-chat", isAuthREST, handleDeleteChat);
 
 export default router;

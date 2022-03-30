@@ -49,8 +49,8 @@ export const ChatContainerHead = connect(
     };
 
     const otherFriend =
-      activeChat.chatInfo.type === "chat"
-        ? activeChat.chatInfo.participants.find((e: any) => {
+      activeChat?.chatInfo?.type === "chat"
+        ? activeChat?.chatInfo?.participants.find((e: any) => {
             console.log(e);
             return e.objectId !== authUser.objectId;
           })

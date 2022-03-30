@@ -72,7 +72,7 @@ export const ParticipantSection = connect(
       <div className={s.participants}>
         <p className="chatModalSectionTitle">Участники</p>
         <div className={s.chatsContainer}>
-          {Object.entries(activeChat.chatInfo.participants)
+          {Object.entries(activeChat?.chatInfo?.participants)
             .filter(
               (_data: any) => _data[1].objectId != authState.auth.objectId
             )

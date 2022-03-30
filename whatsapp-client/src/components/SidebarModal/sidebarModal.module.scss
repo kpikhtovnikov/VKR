@@ -145,6 +145,7 @@
   width: 100%;
   padding: 5px 10px 5px 10px;
   border-top: 0.5px solid rgba(128, 128, 128, 0.486);
+  border-bottom: 0.5px solid rgba(128, 128, 128, 0.486);
   cursor: pointer;
   svg {
     background-color: #009688;
@@ -159,7 +160,7 @@
     font-size: 13px;
     text-align: left;
     height: 50px;
-    border-bottom: 0.5px solid rgba(128, 128, 128, 0.486);
+    // border-bottom: 0.5px solid rgba(128, 128, 128, 0.486);
   }
 }
 
@@ -255,10 +256,12 @@
 }
 
 .newGroupInfo {
+  border-top: 0.5px solid rgba(128, 128, 128, 0.486);
+  // border-bottom: 0.5px solid rgba(128, 128, 128, 0.486);
   .selectedUserDiv {
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 50px;
+    // height: 50px;
 
     &::-webkit-scrollbar {
       width: 5px;

@@ -1,5 +1,6 @@
 import { takeLatest, call, put } from "@redux-saga/core/effects";
-import { saveNewChatOnMongoDb } from "api/saveNewChatOnMongoDb";
+import { deleteChatOnMongoDb, saveNewChatOnMongoDb } from "api/saveNewChatOnMongoDb";
+import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 import { getActiveSocket } from "config/globalSocket";
 import {
   createNewGroup,
@@ -10,7 +11,9 @@ import {
   newGroupCreated,
   onChatsLoadComplete,
   sendMsgStart,
-  setActiveChat
+  setActiveChat,
+  deleteChat,
+  updateChats
 } from "../reducers/chat";
 import store from "../store";
 import { globalAxios } from "config/globalAxios";
@@ -92,9 +95,30 @@ export function* initSendMsgStart() {
 }
 
 //delete chat
-export function* deleteChat() {
-  yield takeLatest(getInitialChats.type, function* () {
-    //@ts-ignore
+export function* deleteChatSaga() {
+  yield takeLatest(deleteChat.type, function* (action: any) {
+    console.log(store.getState().chatState.chat[action.payload.refId])
+    console.log(action.payload)
+    const v: number = yield call(
+      deleteChatOnMongoDb,
+      store.getState().chatState.chat[action.payload.refId],
+      "/delete-chat"
+    );
+    console.log(v)
+    if (v === 200) {
+
+      // const chats = store.getState().chatState.chat
+      // let chatsObj = [];
+      // // })
+      // for (let key in chats) {
+      //   // console.log(key)
+      //   if(key != action.payload.refId) {
+      //     chatsObj.push(chats[key])
+      //   }
+      // }
+      // yield put(onChatsLoadComplete(chatsObj));
+    
+      //@ts-ignore
     const _all = yield call(getInitialChatData);
     //@ts-ignore
     const chats = yield call(getAllMessages, _all);
@@ -106,6 +130,12 @@ export function* deleteChat() {
       return result;
     }, {});
     yield put(onChatsLoadComplete(chatsObj));
+
+  } else {
+      if (v === 404) {
+        alert('Не удалось удалить чат')
+      }
+    }
   });
 }
 

@@ -6,6 +6,7 @@ import { createNewChat, setActiveChat } from "redux/reducers/chat";
 import { setSidebarModal } from "redux/reducers/sidebarChatModal";
 import { setDropDown } from "redux/reducers/dropDown";
 import { searchType } from "constants/searchText";
+import Modal from "@material-ui/core/Modal";
 
 const passStateToProps = ({ dropDownMenu, chatState, authState }: any) => ({
   authUsers: chatState.authUsers,
@@ -100,10 +101,10 @@ export const NewMsgSidebar = connect(
         setPersonalSettingsDropdown({
           type: "addToGroup",
           position: {
-            // x: e.target.getBoundingClientRect().left - 110,
-            // y: e.target.getBoundingClientRect().top + 34,
-            x: e.target.getBoundingClientRect().left - 55,
-            y: e.target.getBoundingClientRect().top - 68
+            // x: e.target.getBoundingClientRect().left - 55,
+            // y: e.target.getBoundingClientRect().top - 68
+            x: e.target.getBoundingClientRect().left + 10,
+            y: e.target.getBoundingClientRect().top + 30,
           },
           params: {},
         });

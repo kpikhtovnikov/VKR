@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 import colors from "data/colors.json";
 import { ObjectID } from "bson";
 import { ChatStateType } from "types/chatSlice.types";
@@ -100,6 +100,20 @@ export const chatSlice = createSlice({
         ...action.payload,
         stillSending: true,
       });
+    },
+
+    deleteChat: (state, action: PayloadAction<any>) => {
+      // console.log(state)
+      console.log(current(state))
+      console.log(state)
+      console.log(current(state).chat[action.payload.refId])
+      delete current(state).chat[action.payload._id];
+      // state.activeChat = action.payload._id;
+      // state = current(state).chat.map((el: any) => {
+      //   return el.chatInfo._id !== action.payload.refId
+      // })
+      // current(state).chat.splice(action.payload.refId)
+      // console.log(state)
     },
 
     sendMsgSuccessful: (state, action: PayloadAction<any>) => {
@@ -262,6 +276,7 @@ export const {
   setSearch,
   setChatSearch,
   setUserSearch,
-  setNewUserSearch
+  setNewUserSearch,
+  deleteChat
 } = chatSlice.actions;
 export default chatSlice;

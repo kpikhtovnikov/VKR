@@ -1,4 +1,5 @@
 import { globalAxios } from "config/globalAxios";
+// import cors from "cors";
 
 export const saveNewChatOnMongoDb = async (
   newChatInfo: any,
@@ -12,11 +13,38 @@ export const saveNewChatOnMongoDb = async (
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        // "Access-Control-Allow-Origin": "*",
+        // "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
       },
       withCredentials: true,
     });
 
     return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deleteChatOnMongoDb = async (
+  newChatInfo: any,
+  endpointPath: string
+) => {
+  try {
+    console.log('deleteChatMongoDb')
+    const {status} = await globalAxios({
+      method: "DELETE",
+      url: endpointPath,
+      data: newChatInfo.chatInfo,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    });
+
+    // console.log(data)
+
+    return status;
   } catch (err) {
     console.log(err);
   }

@@ -29,22 +29,21 @@ import {
   setAttachmentModal,
   uploadAttachments,
 } from "redux/reducers/attachmentModal";
+import { setDropDown } from "redux/reducers/dropDown";
 import { sendMsgStart } from "redux/reducers/chat";
 import { parseAttachmentFiles } from "utils/parseAttachementFiles";
 import { setGlobalModal } from "redux/reducers/globalModal";
-
-// const passStateToProps = ({ dropDownMenu }: any) => ({
-//   dropMenu: dropDownMenu.dropDown,
-// });
 
 const passStateFromProps = ({
   chatState,
   attachmentModal,
   authState,
+  dropDownMenu
 }: any) => ({
   activeChat: chatState.chat[chatState.activeChat],
   attachmentModal,
   authUser: authState.auth,
+  dropDown: dropDownMenu.dropDown,
 });
 
 const passDispatchToProps = (dispatch: any) => ({
@@ -55,12 +54,20 @@ const passDispatchToProps = (dispatch: any) => ({
   setGlobalModal: (modal: any) => dispatch(setGlobalModal(modal)),
   startUploadingAttachments: (payload: any) =>
     dispatch(uploadAttachments(payload)),
+  setPersonalSettingsDropdown: (dropDown: any) =>
+    dispatch(setDropDown(dropDown)),
 });
 
+// const passStateToProps = ({ dropDownMenu }: any) => ({
+//   // dropMenu: dropDownMenu.dropDown,
+//   dropDown: dropDownMenu.dropDown,
+// });
+
+
 export const ChatContainerFooter = connect(
+  // passStateToProps,
   passStateFromProps,
   passDispatchToProps,
-  // passStateToProps
 )(
   ({
     setAttachmentModal,
@@ -72,7 +79,9 @@ export const ChatContainerFooter = connect(
     sendMessage,
     setGlobalModal,
     startUploadingAttachments,
-    dropMenu
+    dropDown,
+    setPersonalSettingsDropdown,
+    // dropMenu,
   }: any) => {
     const [height, setHeight] = useState(0);
     const sizeParam = {
@@ -180,34 +189,95 @@ export const ChatContainerFooter = connect(
       }
     };
 
+    // const attachmentsArray = [
+    //   <PictureIcon className={s.pictureIcon}>
+    //     <input
+    //       onChange={handleAttachments}
+    //       multiple={true}
+    //       type="file"
+    //       accept="image/png"
+    //     />
+    //   </PictureIcon>,
+    //   <CameraIcon onClick={takePhoto} className={s.cameraIcon} />,
+    //   <DocumentIcon className={s.docIcon}>
+    //     <input
+    //       onChange={handleAttachments}
+    //       type="file"
+    //       multiple={false}
+    //       accept=".docx, .doc, .pdf, .zip, .rar"
+    //     />
+    //   </DocumentIcon>,
+    //   // <AvatarIcon className={s.avatarIcon} />,
+    //   <VideoCallIcon className={s.videoIcon}>
+    //     <input
+    //       onChange={handleAttachments}
+    //       type="file"
+    //       multiple={false}
+    //       accept="video/mp4"
+    //     />
+    //   </VideoCallIcon>,
+    // ];
+
     const attachmentsArray = [
-      <PictureIcon className={s.pictureIcon}>
-        <input
-          onChange={handleAttachments}
-          multiple={true}
-          type="file"
-          accept="image/png"
-        />
-      </PictureIcon>,
-      <CameraIcon onClick={takePhoto} className={s.cameraIcon} />,
-      <DocumentIcon className={s.docIcon}>
-        <input
-          onChange={handleAttachments}
-          type="file"
-          multiple={false}
-          accept=".docx, .doc, .pdf, .zip, .rar"
-        />
+      {
+        'element': 
+        <PictureIcon className={s.pictureIcon}>
+            <input
+            onChange={handleAttachments}
+            multiple={true}
+            type="file"
+            accept="image/png"
+            />
+        </PictureIcon>,
+        'name': 'Загрузить фото'
+      },
+      {
+        'element': <CameraIcon onClick={takePhoto} className={s.cameraIcon} />,
+        'name': 'Сделать фото'
+      },
+      {
+        'element':
+        <DocumentIcon className={s.docIcon}>
+            <input
+            onChange={handleAttachments}
+            type="file"
+            multiple={false}
+            accept=".docx, .doc, .pdf, .zip, .rar"
+            />
       </DocumentIcon>,
-      // <AvatarIcon className={s.avatarIcon} />,
-      <VideoCallIcon className={s.videoIcon}>
-        <input
-          onChange={handleAttachments}
-          type="file"
-          multiple={false}
-          accept="video/mp4"
-        />
+        'name': 'Загрузить документ'
+      },
+      {
+        'element':
+        <VideoCallIcon className={s.videoIcon}>
+            <input
+            onChange={handleAttachments}
+            type="file"
+            multiple={false}
+            accept="video/mp4"
+            />
       </VideoCallIcon>,
+        'name': 'Загрузить видео'
+      },
+      // <AvatarIcon className={s.avatarIcon} />,
     ];
+
+    const toggleDropdown = (e: any) => {
+      if (dropDown.type === "addFiles") {
+        setPersonalSettingsDropdown({
+          type: "",
+        });
+      } else {
+        setPersonalSettingsDropdown({
+          type: "addFiles",
+          position: {
+            x: e.target.getBoundingClientRect().left,
+            y: e.target.getBoundingClientRect().top - 200
+          },
+          params: {},
+        });
+      };
+    };
 
     return (
       <>
@@ -286,31 +356,11 @@ export const ChatContainerFooter = connect(
                 className="icons"
               >
               </AttachmentIcon>
-              {/* <AttachmentIcon className="icons"> */}
-              {/* <AttachmentIcon className="icons">
-                <input
-                  onChange={handleAttachments}
-                  type="file"
-                  multiple={false}
-                  accept="image/png, .docx, .doc, .pdf, .zip, .rar, video/mp4"
-                />
+              {/* <AttachmentIcon
+                onClick={toggleDropdown}
+                className="icons"
+              >
               </AttachmentIcon> */}
-              {/* <DropdownAnimationUp
-                  sizeParam={sizeParam}
-                  locationParams={dropMenu.position}
-                  className={s.dropDown}
-                  fixedDropdown={true}
-                >
-                  <div className={s.list}>
-                    <p>Информация о чате</p>
-                  </div>
-                  <div className={s.list}>
-                    <p>Очистить сообщения</p>
-                  </div>
-                  <div className={s.list}>
-                    <p>Удалить чат</p>
-                  </div>
-                </DropdownAnimationUp> */}
             </div>
           </div>
           <div

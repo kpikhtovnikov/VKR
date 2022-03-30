@@ -19,7 +19,7 @@ export const ShowAttachmentAnimations = ({
         <a.div className={className}>
             {trail.map((style, index) => (
                 <a.div key={`_${index}`} style={{ ...style, marginLeft: -5 }}>
-                    {items[index]}
+                    {items[index].element}
                 </a.div>
             ))}
         </a.div>

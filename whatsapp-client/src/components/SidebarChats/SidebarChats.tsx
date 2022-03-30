@@ -66,6 +66,9 @@ export const SidebarChats = connect(
     console.log(allUsers)
 
 
+    useEffect(() => {
+      console.log(chatState.chat)
+    }, [data])
 
     const handleDropMenuClicks = (e: any, type: string) => {
       e.stopPropagation();
