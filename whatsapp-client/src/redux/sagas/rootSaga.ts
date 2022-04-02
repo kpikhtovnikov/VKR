@@ -10,7 +10,8 @@ import {
   initChatLoad,
   initGroupInfoUpdateSaga,
   initSendMsgStart,
-  deleteChatSaga
+  deleteChatSaga,
+  exitChatSaga
 } from "./chatSagas";
 import { initCallSaga } from "./callerInfoSagas";
 import { initFileUpload } from "./uploadAttachmentSaga";
@@ -27,6 +28,7 @@ export default function* rootSaga() {
     // activeChatSwitch(),
     initGroupInfoUpdateSaga(),
     initAuthuserInfoUpdateSaga(),
-    deleteChatSaga()
+    deleteChatSaga(),
+    exitChatSaga()
   ]);
 }

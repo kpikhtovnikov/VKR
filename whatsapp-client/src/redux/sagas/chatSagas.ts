@@ -1,5 +1,5 @@
 import { takeLatest, call, put } from "@redux-saga/core/effects";
-import { deleteChatOnMongoDb, saveNewChatOnMongoDb } from "api/saveNewChatOnMongoDb";
+import { deleteChatOnMongoDb, saveNewChatOnMongoDb, exitChatOnMongoDb } from "api/saveNewChatOnMongoDb";
 import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 import { getActiveSocket } from "config/globalSocket";
 import {
@@ -13,7 +13,7 @@ import {
   sendMsgStart,
   setActiveChat,
   deleteChat,
-  updateChats
+  exitChat
 } from "../reducers/chat";
 import store from "../store";
 import { globalAxios } from "config/globalAxios";
@@ -126,6 +126,34 @@ export function* deleteChatSaga() {
   } else {
       if (v === 404) {
         alert('Не удалось удалить чат')
+      }
+    }
+  });
+}
+
+
+//exit chat
+export function* exitChatSaga() {
+  yield takeLatest(exitChat.type, function* (action: any) {
+    console.log(store.getState().chatState.chat[action.payload.refId])
+    console.log(action.payload)
+    const v: number = yield call(
+      exitChatOnMongoDb,
+      { 
+        chatId: action.payload.refId,
+        _id: action.payload._id
+      },
+      "/exit-chat"
+    );
+    console.log(v)
+    if (v === 200) {
+
+      window.location.href = exitChat.type
+      window.location.reload();    
+
+  } else {
+      if (v === 404) {
+        alert('Не удалось выйти из чата')
       }
     }
   });

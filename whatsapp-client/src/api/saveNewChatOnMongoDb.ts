@@ -50,6 +50,31 @@ export const deleteChatOnMongoDb = async (
   }
 };
 
+export const exitChatOnMongoDb = async (
+  data: any,
+  endpointPath: string
+) => {
+  try {
+    console.log('exitChatMongoDb')
+    const {status} = await globalAxios({
+      method: "PUT",
+      url: endpointPath,
+      data: data,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    });
+
+    // console.log(data)
+
+    return status;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // import { getAccessToken } from "utils/accessToken";
 
 // export const saveNewChatOnMongoDb = async (

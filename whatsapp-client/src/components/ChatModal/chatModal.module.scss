@@ -77,6 +77,18 @@
     cursor: pointer;
   }
 
+  .exitModal {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    // border-bottom: 8px solid #0d1418;
+    background-color: #131c21;
+    padding: 0px 0px 0px 0px;
+    text-transform: "none"; 
+    color: #64770d;
+    cursor: pointer;
+  }
+
   .MuiButtonLabel {
     text-transform: none;
   }

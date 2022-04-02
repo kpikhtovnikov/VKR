@@ -108,12 +108,14 @@ export const chatSlice = createSlice({
       console.log(state)
       console.log(current(state).chat[action.payload.refId])
       delete current(state).chat[action.payload._id];
-      // state.activeChat = action.payload._id;
-      // state = current(state).chat.map((el: any) => {
-      //   return el.chatInfo._id !== action.payload.refId
-      // })
-      // current(state).chat.splice(action.payload.refId)
+    },
+
+    exitChat: (state, action: PayloadAction<any>) => {
       // console.log(state)
+      console.log(current(state))
+      console.log(state)
+      console.log(current(state).chat[action.payload.refId])
+      delete current(state).chat[action.payload._id];
     },
 
     sendMsgSuccessful: (state, action: PayloadAction<any>) => {
@@ -277,6 +279,7 @@ export const {
   setChatSearch,
   setUserSearch,
   setNewUserSearch,
-  deleteChat
+  deleteChat,
+  exitChat
 } = chatSlice.actions;
 export default chatSlice;
