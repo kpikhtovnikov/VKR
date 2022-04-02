@@ -107,29 +107,21 @@ export function* deleteChatSaga() {
     console.log(v)
     if (v === 200) {
 
-      // const chats = store.getState().chatState.chat
-      // let chatsObj = [];
-      // // })
-      // for (let key in chats) {
-      //   // console.log(key)
-      //   if(key != action.payload.refId) {
-      //     chatsObj.push(chats[key])
-      //   }
-      // }
-      // yield put(onChatsLoadComplete(chatsObj));
-    
-      //@ts-ignore
-    const _all = yield call(getInitialChatData);
+      window.location.href = deleteChat.type
+      window.location.reload();    
     //@ts-ignore
-    const chats = yield call(getAllMessages, _all);
-    const chatsObj = chats.reduce((result: any, item: any, index: number) => {
-      result[item[0]._id] = {
-        chatInfo: item[0],
-        messages: item[1],
-      };
-      return result;
-    }, {});
-    yield put(onChatsLoadComplete(chatsObj));
+    // const _all = yield call(getInitialChatData);
+    //@ts-ignore
+    // const chats = yield call(getAllMessages, _all);
+    // const chatsObj = chats.reduce((result: any, item: any, index: number) => {
+    //   result[item[0]._id] = {
+    //     chatInfo: item[0],
+    //     messages: item[1],
+    //   };
+    //   return result;
+    // }, {});
+    // console.log(chatsObj)
+    // yield put(onChatsLoadComplete(chatsObj));
 
   } else {
       if (v === 404) {
