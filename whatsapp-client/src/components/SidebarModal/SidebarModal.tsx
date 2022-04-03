@@ -30,6 +30,7 @@ const Modal = ({ sidebarModal, closeModal }: any) => {
       return <UserSidebar />;
     case "addUsersToGroup":
       return <AddUsersToGroup closeModal={closeModal} />;
+      // return <AddUsersToGroup />;
     default:
       return <div />;
   }

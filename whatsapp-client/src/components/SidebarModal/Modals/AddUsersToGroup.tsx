@@ -7,6 +7,7 @@ import { ObjectID } from "bson";
 import { newGroupIcon } from "./newGroupIcon";
 import { SidebarSearch } from "components/SidebarSearch/SidebarSearch";
 import { searchType } from "constants/searchText";
+import { setSidebarModal } from "redux/reducers/sidebarChatModal";
 
 const passStateToProps = ({ chatState, authState }: any) => ({
   authUsers: chatState.authUsers,
@@ -20,6 +21,7 @@ const passStateToProps = ({ chatState, authState }: any) => ({
 const passDispatchToProps = (dispatch: any) => ({
   setActiveChat: (activeChat: any) => dispatch(setActiveChat(activeChat)),
   createNewGroupStart: (payload: any) => dispatch(createNewGroup(payload)),
+  setSidebarModal: (modal: any) => dispatch(setSidebarModal(modal)),
 });
 
 export const AddUsersToGroup = connect(
@@ -33,11 +35,20 @@ export const AddUsersToGroup = connect(
     chats,
     setActiveChat,
     activeChat,
-    closeModal,
     createNewGroupStart,
+    setSidebarModal,
+    closeModal
   }: any) => {
     const [userList, setUserList] = useState(authUsers);
     const [grpName, setGrpName] = useState("");
+    const [reverse, setReverse] = useState(true);
+    // const closeModal = () => {
+    //   if (reverse) {
+    //     setReverse(false);
+    //     setSidebarModal(null);
+    //   }
+    // };
+
     const selectUser = (add: string) => {
       setUserList((prev: any) => ({
         ...prev,
@@ -83,12 +94,12 @@ export const AddUsersToGroup = connect(
         type: "group",
         desc: `Чат создал ${authState.auth.displayName}`,
       });
+      console.log(closeModal)
       closeModal();
     };
 
     return (
       <div className={s.sidebarModalBody}>
-        {/* <SidebarSearch typeSearch={searchType.newUserSearch}/> */}
         <div className={`${s.allChats} ${s.adduserstog}`}>
         <SidebarSearch typeSearch={searchType.newUserSearch}/>
           <div className={s.newGroupInfo}>

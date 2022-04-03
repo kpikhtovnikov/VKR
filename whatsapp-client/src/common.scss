@@ -52,6 +52,8 @@ code {
 }
 
 .chatModalSectionTitle {
+  display: flex;
+  justify-content: space-between;
   color: #009688;
   font-size: 12px;
   text-align: left;

@@ -104,6 +104,41 @@
   }
 }
 
+.MuiPaperRoot {
+  color: rgb(207 145 145 / 87%);
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  background-color: rgba(29, 35, 37, 0.726);
+}
+
+.displayName {
+  color:#ffffff;
+}
+
+.unselectIcon {
+  color:#ffffff;
+}
+
+.editNameButton {
+  
+  display: flex;
+  align-items: center;
+  // justify-content: end;
+  color:#828689;
+  small {
+    margin-right: 3px;
+  }
+  svg {
+    height: 17px;
+    cursor: pointer;
+    margin-left: 2px;
+  }
+}
+
+.editParticipantsModalButtons {
+  display: flex;
+  justify-content: center;
+}
+
 .infoSub {
   display: flex;
   justify-content: space-between;
@@ -123,18 +158,36 @@
     cursor: pointer;
     margin-left: 2px;
   }
-  .editNameButton {
-    display: flex;
-    align-items: center;
-    small {
-      margin-right: 3px;
+
+  .infoModalBody {
+    overflow-y: scroll;
+    height: calc(100vh - 60px);
+    background-color: #0d1418;
+    &::-webkit-scrollbar {
+      width: 5px;
     }
-    svg {
-      height: 17px;
-      cursor: pointer;
-      margin-left: 2px;
+    &::-webkit-scrollbar-thumb {
+      background-color: rgb(71, 71, 71);
+    }
+    input {
+      background-color: transparent;
+      color: whitesmoke;
+      border: none;
+      outline: none;
     }
   }
+  // .editNameButton {
+  //   display: flex;
+  //   align-items: center;
+  //   small {
+  //     margin-right: 3px;
+  //   }
+  //   svg {
+  //     height: 17px;
+  //     cursor: pointer;
+  //     margin-left: 2px;
+  //   }
+  // }
 }
 
 .newGroup {

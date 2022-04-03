@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { createNewChat, setActiveChat } from "redux/reducers/chat";
 import { setSidebarModal } from "redux/reducers/sidebarChatModal";
 import { Avatar } from "@material-ui/core";
+import { EditParticipantsModal } from "../../EditParticipantsModal";
 
 const passStateToProps = ({ chatState, authState }: any) => ({
   activeChat: chatState.chat[chatState.activeChat],
@@ -70,7 +71,10 @@ export const ParticipantSection = connect(
 
     return (
       <div className={s.participants}>
-        <p className="chatModalSectionTitle">Участники</p>
+        <p className="chatModalSectionTitle">
+          <span>Участники</span>
+          <EditParticipantsModal />
+        </p>
         <div className={s.chatsContainer}>
           {Object.entries(activeChat?.chatInfo?.participants)
             .filter(
