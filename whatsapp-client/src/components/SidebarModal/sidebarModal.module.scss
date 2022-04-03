@@ -134,6 +134,22 @@
   }
 }
 
+.addChatButton {
+  
+  display: flex;
+  align-items: center;
+  // justify-content: end;
+  color:#b1b3b5;
+  // small {
+  //   margin-right: 3px;
+  // }
+  svg {
+    height: 20px;
+    cursor: pointer;
+    // margin-left: 2px;
+  }
+}
+
 .editParticipantsModalButtons {
   display: flex;
   justify-content: center;
