@@ -12,6 +12,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { DeleteModal } from "./DeleteModal";
 import { ExitModal } from "./ExitModal";
 import { EditParticipantsModal } from "./EditParticipantsModal";
+import { setDropDown } from "redux/reducers/dropDown";
 
 const passStateToProps = ({ chatModal, chatState, authState }: any) => ({
   chatContainerModal: chatModal.modal,
@@ -23,13 +24,14 @@ const passStateToProps = ({ chatModal, chatState, authState }: any) => ({
 const passDispatchToProps = (dispatch: any) => ({
   setChatContainerModal: (modal: any) => dispatch(setChatContainerModal(modal)),
   deleteChatInfo: (payload: any) => dispatch(deleteChat(payload)),
+  setDropMenu: (dropMenu: any) => dispatch(setDropDown(dropMenu)),
 });
 
 
 export const UserInfoModal = connect(
   passStateToProps,
   passDispatchToProps
-)(({ activeChat, setReverseAnimation, myObjId, allUsers, deleteChatInfo }: any) => {
+)(({ activeChat, setReverseAnimation, myObjId, allUsers, deleteChatInfo, setDropMenu }: any) => {
 
 
   const otherFriend =
@@ -40,12 +42,17 @@ export const UserInfoModal = connect(
         })
       : null;
 
+  const handleHeaderClick = () => {
+      setDropMenu(false)
+      setReverseAnimation(true)
+  };
+
   return (
     <div>
     <div className={s.userInfoModal}>
       <div className={s.modalHead}>
         <svg
-          onClick={() => setReverseAnimation(true)}
+          onClick={handleHeaderClick}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           width="24"

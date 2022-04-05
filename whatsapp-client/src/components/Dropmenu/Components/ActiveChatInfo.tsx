@@ -49,7 +49,7 @@ export const ActiveChatInfo = connect(passStateToProps, passDispatchToProps)(
           <p>Mute notifications</p>
         </div> */}
         <div className={s.list}>
-          <p>Очистить сообщения</p>
+          <p>Выйти из чата</p>
         </div>
         <div className={s.list}>
           <p>Удалить чат</p>
