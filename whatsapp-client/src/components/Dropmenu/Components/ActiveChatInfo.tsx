@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { DropdownAnimation } from "animations/dropdown/DropdownAnimation";
 import { setChatContainerModal } from "redux/reducers/chatContainerModal";
 import { setDropDown } from "redux/reducers/dropDown";
+import { ExitModalChatInfo } from "./ExitModalChatInfo";
+import { DeleteModalChatInfo } from "./DeleteModalChatInfo";
 
 const passStateToProps = ({ dropDownMenu }: any) => ({
   dropMenu: dropDownMenu.dropDown,
@@ -42,17 +44,11 @@ export const ActiveChatInfo = connect(passStateToProps, passDispatchToProps)(
             onClick={handleInformationChatClick}
           >Информация о чате</p>
         </div>
-        {/* <div className={s.list}>
-          <p>Select messages</p>
+        <div className={s.list}>
+          <ExitModalChatInfo />
         </div>
         <div className={s.list}>
-          <p>Mute notifications</p>
-        </div> */}
-        <div className={s.list}>
-          <p>Выйти из чата</p>
-        </div>
-        <div className={s.list}>
-          <p>Удалить чат</p>
+          <DeleteModalChatInfo />
         </div>
       </DropdownAnimation>
     );
