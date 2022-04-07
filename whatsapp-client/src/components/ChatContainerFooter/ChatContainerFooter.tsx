@@ -220,22 +220,6 @@ export const ChatContainerFooter = connect(
 
     const attachmentsArray = [
       {
-        'element': 
-        <PictureIcon className={s.pictureIcon}>
-            <input
-            onChange={handleAttachments}
-            multiple={true}
-            type="file"
-            accept="image/png"
-            />
-        </PictureIcon>,
-        'name': 'Загрузить фото'
-      },
-      {
-        'element': <CameraIcon onClick={takePhoto} className={s.cameraIcon} />,
-        'name': 'Сделать фото'
-      },
-      {
         'element':
         <DocumentIcon className={s.docIcon}>
             <input
@@ -246,6 +230,23 @@ export const ChatContainerFooter = connect(
             />
       </DocumentIcon>,
         'name': 'Загрузить документ'
+      },
+      {
+        'element': <CameraIcon onClick={takePhoto} className={s.cameraIcon} />,
+        'name': 'Сделать фото'
+      },
+      {
+        'element': 
+        <PictureIcon className={s.pictureIcon}>
+            <input
+            onChange={handleAttachments}
+            multiple={true}
+            type="file"
+            accept="image/png"
+            />
+            {/* Загрузить фото */}
+        </PictureIcon>,
+        'name': 'Загрузить фото'
       },
       {
         'element':
@@ -306,36 +307,6 @@ export const ChatContainerFooter = connect(
                 />
               </ExpandOptions>
             ) : null}
-            {/* <SmileIcon
-              onClick={() => setActivity("emojiDrawer")}
-              className={`icons ${
-                activity === "emojiDrawer" ? "active-icon" : ""
-              }`}
-            /> */}
-
-            {activity ? (
-              <ExpandOptions reverse={reverseActivityAnimation}>
-                <div
-                  style={{
-                    display: "flex",
-                  }}
-                >
-                  {/* <GifIcon
-                    onClick={() => setActivity("gifDrawer")}
-                    className={`icons ${
-                      activity === "gifDrawer" ? "active-icon" : ""
-                    }`}
-                  /> */}
-                  {/* <StickerIcon
-                    onClick={() => setActivity("stickerDrawer")}
-                    className={`icons ${
-                      activity === "stickerDrawer" ? "active-icon" : ""
-                    }`}
-                  /> */}
-                </div>
-              </ExpandOptions>
-            ) : null}
-
             <div className={s.attachmentButton}>
               {attachmentMenu ? (
                 <ShowAttachmentAnimations

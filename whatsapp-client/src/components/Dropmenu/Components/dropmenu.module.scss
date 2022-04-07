@@ -36,3 +36,62 @@
 .dropDownWidth {
     width: 400px;
 }
+
+.attachments {
+    position: absolute;
+    margin-top: 40px;
+    margin-left: 2px;
+    span {
+        border-radius: 50%;
+        padding: 11px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
+        input {
+            background: linen;
+            cursor: pointer;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+            opacity: 0;
+        }
+    }
+    .videoIcon {
+        background: linear-gradient(#0458c5 100%, #2974d6 100%);
+    }
+
+    .avatarIcon {
+        background: linear-gradient(#0389cc 50%, #039be5 50%);
+    }
+
+    .docIcon {
+        background: linear-gradient(
+            rgb(45, 40, 107) 100%,
+            rgb(100, 90, 240) 100%
+        );
+    }
+
+    .cameraIcon {
+        background: linear-gradient(
+            rgb(146, 23, 60) 100%,
+            rgb(235, 61, 142) 100%
+        );
+    }
+
+    .pictureIcon {
+        background: linear-gradient(
+            rgb(17, 102, 102) 100%,
+            rgb(25, 117, 110) 100%
+        );
+    }
+    svg {
+        height: 17px;
+        width: 17px;
+        // height: 37px;
+        // width: 50px;
+    }
+}

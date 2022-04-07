@@ -140,7 +140,7 @@ export const TakePhoto = connect(
               ></path>
             </svg>
 
-            <span>Take photo</span>
+            <span>Сделать фото</span>
           </div>
         )}
         <div>

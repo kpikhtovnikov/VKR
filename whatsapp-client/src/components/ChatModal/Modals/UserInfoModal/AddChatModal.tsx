@@ -88,12 +88,12 @@ export const AddChatModal = connect(
         })
       : null;
 
-//   useEffect(() => {
-//     console.log(userList)
-//     Object.entries(userList).map((el: any) => {
-//       selectUser(el[0])
-//     })
-//   }, [])
+  useEffect(() => {
+    console.log(userList)
+    // Object.entries(userList).map((el: any) => {
+    //   selectUser(el[0])
+    // })
+  }, [])
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -212,7 +212,7 @@ export const AddChatModal = connect(
         >
           <DialogContentText>
         <div className={s.sidebarModalBody}>
-        {/* <div className={`${s.allChats} ${s.adduserstog}`}> */}
+        <div className={`${s.allChats} ${s.adduserstog}`}>
         <SidebarSearch typeSearch={searchType.newUserSearch}/>
           <div className={s.newGroupInfo}>
             <div className={s.addedUserInfo}>
@@ -288,7 +288,7 @@ export const AddChatModal = connect(
           <button onClick={createNewGroup} className={s.createGrpButton}>
             Создать
           </button>
-        {/* </div> */}
+        </div>
       </div>
           </DialogContentText>
         </DialogContent>

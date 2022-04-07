@@ -201,10 +201,18 @@ export const AttachmentsAnimation = connect(
         //     ))}
         // </a.div>
         <a.div className={t.attachments}>
-            {attachmentsArray.map((el: any) => {
+            {trail.map((style, index) => (
+              // console.log(items[index].element)
+                <a.div key={`_${index}`} style={{ ...style, marginLeft: -50 }}>
+                    {items[index].element}
+                </a.div>
+            ))}
+            {
+              attachmentsArray.map((el: any) => {
                 console.log(el)
                 return el.name;
-            })}
+            })
+            }
         </a.div>
     );
   }

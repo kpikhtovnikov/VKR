@@ -81,7 +81,7 @@
     .attachments {
         position: absolute;
         margin-top: 40px;
-        margin-left: 0px;
+        margin-left: 2px;
         span {
             border-radius: 50%;
             padding: 11px;
@@ -102,7 +102,7 @@
             }
         }
         .videoIcon {
-            background: linear-gradient(#0458c5 100%, #2974d6 100%);
+            background: linear-gradient(#0a3f85 100%, #2974d6 100%);
         }
 
         .avatarIcon {
@@ -111,30 +111,35 @@
 
         .docIcon {
             background: linear-gradient(
-                rgb(78, 71, 185) 100%,
+                rgb(146, 23, 60) 100%,
                 rgb(100, 90, 240) 100%
             );
         }
 
         .cameraIcon {
             background: linear-gradient(
-                rgb(194, 56, 120) 100%,
+                rgb(165, 175, 16) 100%,
                 rgb(235, 61, 142) 100%
             );
         }
 
         .pictureIcon {
             background: linear-gradient(
-                rgb(178, 73, 192) 100%,
-                rgb(210, 85, 226) 100%
+                rgb(17, 102, 102) 100%,
+                rgb(25, 117, 110) 100%
             );
         }
         svg {
             height: 17px;
             width: 17px;
+            // height: 37px;
+            // width: 50px;
         }
     }
 
+    .pictureIconText {
+        font-size: 10px;
+    }
     .attachmentAll {
         position: absolute;
         margin-top: 40px;

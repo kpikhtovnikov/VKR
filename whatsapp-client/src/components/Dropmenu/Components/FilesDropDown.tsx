@@ -136,32 +136,48 @@ export const FilesDropDown = connect(
 
 
     const attachmentsArray = [
-      <PictureIcon className={s.pictureIcon}>
-        <input
-          onChange={handleAttachments}
-          multiple={true}
-          type="file"
-          accept="image/png"
-        />
-      </PictureIcon>,
-      <CameraIcon onClick={takePhoto} className={s.cameraIcon} />,
-      <DocumentIcon className={s.docIcon}>
-        <input
-          onChange={handleAttachments}
-          type="file"
-          multiple={false}
-          accept=".docx, .doc, .pdf, .zip, .rar"
-        />
+      {
+        'element': 
+        <PictureIcon className={s.pictureIcon}>
+            <input
+            onChange={handleAttachments}
+            multiple={true}
+            type="file"
+            accept="image/png"
+            />
+            {/* Загрузить фото */}
+        </PictureIcon>,
+        'name': 'Загрузить фото'
+      },
+      {
+        'element': <CameraIcon onClick={takePhoto} className={s.cameraIcon} />,
+        'name': 'Сделать фото'
+      },
+      {
+        'element':
+        <DocumentIcon className={s.docIcon}>
+            <input
+            onChange={handleAttachments}
+            type="file"
+            multiple={false}
+            accept=".docx, .doc, .pdf, .zip, .rar"
+            />
       </DocumentIcon>,
-      // <AvatarIcon className={s.avatarIcon} />,
-      <VideoCallIcon className={s.videoIcon}>
-        <input
-          onChange={handleAttachments}
-          type="file"
-          multiple={false}
-          accept="video/mp4"
-        />
+        'name': 'Загрузить документ'
+      },
+      {
+        'element':
+        <VideoCallIcon className={s.videoIcon}>
+            <input
+            onChange={handleAttachments}
+            type="file"
+            multiple={false}
+            accept="video/mp4"
+            />
       </VideoCallIcon>,
+        'name': 'Загрузить видео'
+      },
+      // <AvatarIcon className={s.avatarIcon} />,
     ];
 
     return (
@@ -172,9 +188,18 @@ export const FilesDropDown = connect(
         fixedDropdown={true}
       >
         {
+        //   <ShowAttachmentAnimations
+        //     items={attachmentsArray}
+        //     className={s.attachments}
+        //     // reverse={reverseAnimationAttachmentMenu}
+        //     // onClose={closeAttachmentMenu}
+        //     reverse={true}
+        //     onClose={true}
+        // />
           <div className={s.dropDownWidth}>
             <AttachmentsAnimation items={attachmentsArray} />
           </div>
+          // <div>f</div>
         }
       </DropdownAnimationUp>
     );
