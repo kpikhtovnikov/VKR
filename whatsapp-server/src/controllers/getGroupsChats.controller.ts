@@ -13,10 +13,8 @@ const getMessages = async (db: any, id: any) => {
       .collection("messages")
       .find({ refId: refId })
       .sort({ timestamp: 1 })
-      // .toArray();
-    
-    console.log('getMessages function')
-    console.log(messages[messages.length-1])
+      .toArray()
+
     return messages[messages.length-1]
   } catch (err) {
     console.log(err)
@@ -25,7 +23,7 @@ const getMessages = async (db: any, id: any) => {
 
 const mergeArrays = (arr1: any, arr2: any) => {
 
-  const merged = _.merge(_.keyBy(arr1, '_id'), _.keyBy(arr2, '_id'));
+  const merged = _.merge(_.keyBy(arr1, '_id'), _.keyBy(arr2, 'refId'));
   const values = _.values(merged);
   // console.log(values)
   return values;
@@ -52,10 +50,10 @@ export const getGroupsChats = async (req: any, res: any) => {
     
     // let messagesChats = await enumerationArray(db, chats)
     // console.log('messagesChats', messagesChats)
-    const messagesChats = await chats.map((el:any) => {
+    const messagesChats = await Promise.all(chats.map((el:any) => {
       return getMessages(db, el._id);
       // console.log(el._id)
-    })
+    }))
 
     // const messages = await db
     //   .collection("messages")
@@ -65,8 +63,8 @@ export const getGroupsChats = async (req: any, res: any) => {
 
     console.log('messagesChats', messagesChats)
     
-    const allChats = await mergeArrays(chats, await messagesChats)
-    console.log(allChats)
+    const allChats = mergeArrays(chats, messagesChats)
+    console.log('allChats', allChats)
     
     const groups: any = await db
       .collection("groups")
