@@ -23,7 +23,7 @@ const getMessages = async (db: any, id: any) => {
 
 const mergeArrays = (arr1: any, arr2: any) => {
 
-  const merged = _.merge(_.keyBy(arr1, '_id'), _.keyBy(arr2, 'refId'));
+  const merged = _.merge(_.keyBy(arr2, 'refId'), _.keyBy(arr1, '_id'));
   const values = _.values(merged);
   // console.log(values)
   return values;
@@ -34,6 +34,8 @@ const mergeArrays = (arr1: any, arr2: any) => {
 export const getGroupsChats = async (req: any, res: any) => {
   try {
     const db: any = await mongoDB().db();
+    let messagesChats = []
+
     const chats: any = await db
       .collection("chats")
       .find({
@@ -45,26 +47,12 @@ export const getGroupsChats = async (req: any, res: any) => {
       })
       .toArray();
 
-
-    console.log('chats', chats)
-    
-    // let messagesChats = await enumerationArray(db, chats)
-    // console.log('messagesChats', messagesChats)
-    const messagesChats = await Promise.all(chats.map((el:any) => {
+    messagesChats = await Promise.all(chats.map((el:any) => {
       return getMessages(db, el._id);
-      // console.log(el._id)
     }))
-
-    // const messages = await db
-    //   .collection("messages")
-    //   .find({ refId: chats[0]._id })
-    //   .sort({ timestamp: 1 })
-    //   .toArray();
-
-    console.log('messagesChats', messagesChats)
     
-    const allChats = mergeArrays(chats, messagesChats)
-    console.log('allChats', allChats)
+    const allChatsWithMessages = mergeArrays(chats, messagesChats)
+    // console.log('allChats', allChatsWithMessages)
     
     const groups: any = await db
       .collection("groups")
@@ -77,10 +65,20 @@ export const getGroupsChats = async (req: any, res: any) => {
       })
       .toArray();
 
-    const fi: any = [...chats, ...groups].sort(
-      (x, y) => x.timestamp - y.timestamp
+    messagesChats = await Promise.all(groups.map((el:any) => {
+      return getMessages(db, el._id);
+    }))
+
+    const allGroupsWithMessages = mergeArrays(groups, messagesChats)
+    // console.log('allGroups', allGroupsWithMessages)
+
+    const fi: any = [...allChatsWithMessages, ...allGroupsWithMessages].sort(
+      (x, y) => y.timestamp - x.timestamp
     );
-    // console.log(fi)
+    // const fi: any = [...chats, ...groups].sort(
+    //   (x, y) => x.timestamp - y.timestamp
+    // );
+    console.log(fi)
     return res.status(201).json({
       data: fi,
     });
