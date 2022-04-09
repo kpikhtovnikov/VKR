@@ -25,6 +25,7 @@ const getInitialChatData = async () => {
     url: `/chats`,
     withCredentials: true,
   });
+  console.log(data)
   //@ts-ignore
   return data.data;
 };
@@ -37,7 +38,7 @@ const getAllMessages = async (data: any) => {
         url: `/chats/${obj._id}`,
         withCredentials: true,
       });
-      console.log(res);
+      // console.log(res);
       //@ts-ignore
       return [obj, res.data.data];
     })
@@ -167,6 +168,7 @@ export function* activeChatSwitch() {
 
 export function* handleGroupCreation() {
   yield takeLatest(createNewGroup.type, function* (action: any) {
+    console.log('createGropuChataSagas')
     const v: number = yield call(
       saveNewChatOnMongoDb,
       store.getState().chatState.chat[action.payload._id],

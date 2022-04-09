@@ -62,12 +62,12 @@ export const SidebarChats = connect(
       dataObject = data
     }
 
-    console.log(data)
-    console.log(allUsers)
+    // console.log(data)
+    // console.log(allUsers)
 
 
     useEffect(() => {
-      console.log(chatState.chat)
+      // console.log(chatState.chat)
     }, [data])
 
     const handleDropMenuClicks = (e: any, type: string) => {

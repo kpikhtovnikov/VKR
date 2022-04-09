@@ -91,7 +91,9 @@ export const chatSlice = createSlice({
 
     // handle active chat
     setActiveChat: (state, action: PayloadAction<any>) => {
+      console.log(action.payload)
       state.activeChat = action.payload.switchTo;
+      console.log(state.activeChat)
     },
 
     // attached to initSendMsgStart saga
@@ -186,6 +188,7 @@ export const chatSlice = createSlice({
     },
 
     createNewGroup: (state, action: PayloadAction<any>) => {
+      console.log(state.activeChat)
       state.chat[action.payload._id] = {
         chatInfo: action.payload,
         messages: [],

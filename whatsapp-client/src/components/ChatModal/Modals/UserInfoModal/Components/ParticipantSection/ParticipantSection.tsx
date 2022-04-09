@@ -43,6 +43,7 @@ export const ParticipantSection = connect(
 
       onClose(true);
 
+      console.log(doesChatExist)
       if (doesChatExist) {
         setActiveChat({
           prevActiveChat: {

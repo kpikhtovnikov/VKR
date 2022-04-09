@@ -117,15 +117,15 @@ export const NewMsgSidebar = connect(
         <SidebarSearch typeSearch={searchType.userSearch}/>
         <div className={s.allChats}>
           <div
-            // onClick={() => {
-            //   setSidebarModal({
-            //     type: "addUsersToGroup",
-            //     params: {
-            //       headerTitle: "Создание чата",
-            //     },
-            //   });
-            // }}
-            onClick={toggleDropdown2}
+            onClick={() => {
+              setSidebarModal({
+                type: "addUsersToGroup",
+                params: {
+                  headerTitle: "Создание чата",
+                },
+              });
+            }}
+            // onClick={toggleDropdown2}
             className={s.newGroup}
           >
             <svg

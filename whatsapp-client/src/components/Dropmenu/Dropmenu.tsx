@@ -25,9 +25,9 @@ export const DropMenu = connect(passStateToProps)(({ dropMenu }: any) => {
             return <ActiveChatInfo />;
         case "personalSetting":
             return <PersonalSettingDropdown />;
-        case "addChat":
-            // return <AddChatDropdown />;
-            return <AddChatDropdown isNewGroup={true}/>;
+        // case "addChat":
+        //     // return <AddChatDropdown />;
+        //     return <AddChatDropdown isNewGroup={true}/>;
         case "addFiles":
             return <FilesDropDown />;
         // case "addToGroup":

@@ -14,7 +14,7 @@ export const handleNewGroup = async (req: any, res: any) => {
     name,
   }: any = req.body;
 
-  console.log(req.body);
+  console.log('newGroup', req.body.type);
 
   if (!_id) {
     return res.sendStatus(404);

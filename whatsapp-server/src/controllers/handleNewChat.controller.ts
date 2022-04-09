@@ -5,7 +5,7 @@ export const handleNewChat = async (req: any, res: any) => {
   const db = await mongoDB().db();
   const { _id, participants, modifiedOn, type } = req.body;
 
-  console.log(req.body);
+  console.log('handleNewChat', req.body.type);
 
   if (!_id) {
     return res.sendStatus(404);

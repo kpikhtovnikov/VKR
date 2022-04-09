@@ -17,6 +17,8 @@ export const switchActiveChat = async (
     const { prevActiveChatId, prevActiveChatType } = payload.prevActiveChat;
     const time = Date.now();
 
+    console.log('switchActiveChat')
+
     // Update last chats info
     await db.collection(`${prevActiveChatType}s`).updateOne(
       {
