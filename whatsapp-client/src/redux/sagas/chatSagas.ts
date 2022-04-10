@@ -1,9 +1,10 @@
 import { takeLatest, call, put } from "@redux-saga/core/effects";
-import { deleteChatOnMongoDb, saveNewChatOnMongoDb, exitChatOnMongoDb } from "api/saveNewChatOnMongoDb";
+import { deleteChatOnMongoDb, saveNewChatOnMongoDb, exitChatOnMongoDb, updateParticipantsGroupOnMongoDb } from "api/saveNewChatOnMongoDb";
 import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 import { getActiveSocket } from "config/globalSocket";
 import {
   createNewGroup,
+  updateParticipantsGroup,
   getInitialChats,
   groupInfoUpdateSuccessfull,
   initGroupInfoUpdate,
@@ -13,7 +14,8 @@ import {
   sendMsgStart,
   setActiveChat,
   deleteChat,
-  exitChat
+  exitChat,
+  updateParticipantsDone
 } from "../reducers/chat";
 import store from "../store";
 import { globalAxios } from "config/globalAxios";
@@ -33,11 +35,16 @@ const getInitialChatData = async () => {
 const getAllMessages = async (data: any) => {
   return await Promise.all(
     data.map(async (obj: any) => {
+      console.log(obj)
+      // if(obj != null) {
+      
       const res = await globalAxios({
         method: "GET",
         url: `/chats/${obj._id}`,
         withCredentials: true,
       });
+      
+      // }
       // console.log(res);
       //@ts-ignore
       return [obj, res.data.data];
@@ -91,6 +98,19 @@ export function* initSendMsgStart() {
     } else {
       // chat already existed, sending message
       socket.emit("iTextMessage", action.payload);
+      
+      // //@ts-ignore
+      // const _all = yield call(getInitialChatData);
+      // //@ts-ignore
+      // const chats = yield call(getAllMessages, _all);
+      // const chatsObj = chats.reduce((result: any, item: any, index: number) => {
+      //   result[item[0]._id] = {
+      //     chatInfo: item[0],
+      //     messages: item[1],
+      //   };
+      //   return result;
+      // }, {});
+      // yield put(onChatsLoadComplete(chatsObj));
     }
   });
 }
@@ -182,6 +202,26 @@ export function* handleGroupCreation() {
         messages: [],
       });
       yield put(newGroupCreated(action.payload._id));
+    }
+  });
+}
+
+export function* updateGroupParticipants() {
+  yield takeLatest(updateParticipantsGroup.type, function* (action: any) {
+    console.log('updateParticipantsGroup')
+    const v: number = yield call(
+      updateParticipantsGroupOnMongoDb,
+      store.getState().chatState.chat[action.payload.chatInfo._id],
+      "/participants-group"
+    );
+    //@ts-ignore
+    const socket = yield call(getActiveSocket);
+    if (v === 200) {
+      socket.emit("updateOthersChats", {
+        chatInfo: action.payload.chatInfo,
+        messages: action.payload.messages,
+      });
+      yield put(updateParticipantsDone(action.payload.chatInfo._id));
     }
   });
 }

@@ -75,6 +75,30 @@ export const exitChatOnMongoDb = async (
   }
 };
 
+export const updateParticipantsGroupOnMongoDb = async (
+  info: any,
+  endpointPath: string
+) => {
+  try {
+    const { data } = await globalAxios({
+      method: "PUT",
+      url: endpointPath,
+      data: info.chatInfo,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        // "Access-Control-Allow-Origin": "*",
+        // "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+      },
+      withCredentials: true,
+    });
+
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 // import { getAccessToken } from "utils/accessToken";
 
 // export const saveNewChatOnMongoDb = async (

@@ -11,7 +11,8 @@ import {
   initGroupInfoUpdateSaga,
   initSendMsgStart,
   deleteChatSaga,
-  exitChatSaga
+  exitChatSaga,
+  updateGroupParticipants
 } from "./chatSagas";
 import { initCallSaga } from "./callerInfoSagas";
 import { initFileUpload } from "./uploadAttachmentSaga";
@@ -29,6 +30,7 @@ export default function* rootSaga() {
     initGroupInfoUpdateSaga(),
     initAuthuserInfoUpdateSaga(),
     deleteChatSaga(),
-    exitChatSaga()
+    exitChatSaga(),
+    updateGroupParticipants()
   ]);
 }

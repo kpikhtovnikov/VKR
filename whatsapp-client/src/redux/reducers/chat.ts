@@ -197,7 +197,22 @@ export const chatSlice = createSlice({
       state.activeChat = action.payload._id;
     },
 
+    updateParticipantsGroup: (state, action: PayloadAction<any>) => {
+      // console.log(state.chat[action.payload._id])
+      state.chat[action.payload.chatInfo._id] = {
+        chatInfo: action.payload.chatInfo,
+        messages: action.payload.messages,
+        stillSaving: true,
+      };
+      // console.log(state.chat[action.payload._id])
+      state.activeChat = action.payload.chatInfo._id;
+    },
+
     newGroupCreated: (state, action: PayloadAction<any>) => {
+      delete state.chat[action.payload._id].stillSaving;
+    },
+
+    updateParticipantsDone: (state, action: PayloadAction<any>) => {
       delete state.chat[action.payload._id].stillSaving;
     },
 
@@ -272,6 +287,8 @@ export const {
   createNewChat,
   updateChats,
   createNewGroup,
+  updateParticipantsGroup,
+  updateParticipantsDone,
   newGroupCreated,
   updateAuthUsersInfo,
   groupInfoUpdateFailed,

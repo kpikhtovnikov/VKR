@@ -12,6 +12,7 @@ import { googlelogin } from "./controllers/googleLogin.controller";
 import { logout } from "./controllers/logout.controller";
 import { handleDeleteChat } from "./controllers/handleDeleteChat.controller";
 import { handleExitChat } from "./controllers/handleExitChat.controller";
+import { handleUpdateParticipantsGroup } from "./controllers/handleUpdateParticipantsGroup.controller";
 const router: express.Router = express.Router();
 
 // temp upload location for files
@@ -55,5 +56,6 @@ router.post("/create-new-group", isAuthREST, handleNewGroup);
 router.post("/create-new-chat", isAuthREST, handleNewChat);
 router.delete("/delete-chat", isAuthREST, handleDeleteChat);
 router.put("/exit-chat", isAuthREST, handleExitChat);
+router.put("/participants-group", isAuthREST, handleUpdateParticipantsGroup);
 
 export default router;

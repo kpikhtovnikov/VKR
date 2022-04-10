@@ -9,14 +9,12 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import { createNewGroup, exitChat } from 'redux/reducers/chat';
+import { exitChat, updateParticipantsGroup } from 'redux/reducers/chat';
 import { connect } from 'react-redux';
 import { Avatar, makeStyles } from "@material-ui/core";
 import { SidebarSearch } from 'components/SidebarSearch/SidebarSearch';
 import { searchType } from "constants/searchText";
 import { useState } from 'react';
-import { ObjectID } from "bson";
-import { newGroupIcon } from 'components/SidebarModal/Modals/newGroupIcon';
 import { useEffect } from 'react';
 
 const useStyles = makeStyles({
@@ -28,7 +26,8 @@ const useStyles = makeStyles({
     '&::-webkit-scrollbar-thumb': {
       backgroundColor: 'rgb(71, 71, 71)'
     },
-    padding: '0px 0px'
+    padding: '0px 0px',
+    backgroundColor: 'rgba(29, 35, 37, 0.726)'
   },
   footerButtonsDisplay: {
     display: 'flex',
@@ -52,7 +51,7 @@ const passStateToProps = ({ chatState, authState }: any) => ({
 
 const passDispatchToProps = (dispatch: any) => ({
   exitChatInfo: (payload: any) => dispatch(exitChat(payload)),
-  createNewGroupStart: (payload: any) => dispatch(createNewGroup(payload)),
+  updateParticipants: (payload: any) => dispatch(updateParticipantsGroup(payload)),
 });
 
 export const EditParticipantsModal = connect(
@@ -65,8 +64,8 @@ export const EditParticipantsModal = connect(
     myObjId, 
     authUsers, 
     authState, 
-    createNewGroupStart,
     chatState, 
+    updateParticipants
   }: any) => {
   
   const [open, setOpen] = useState(false);
@@ -74,21 +73,18 @@ export const EditParticipantsModal = connect(
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const classes = useStyles();
   const [userList, setUserList] = useState(authUsers);
-  const [grpName, setGrpName] = useState("");
-
-  const otherFriend =
-    activeChat?.chatInfo?.type === "chat"
-      ? activeChat?.chatInfo?.participants.find((e: any) => {
-          console.log(e);
-          return e.objectId !== myObjId;
-        })
-      : null;
+  const [textParticipants, setTextParticipants] = useState('')
 
   useEffect(() => {
-    console.log(userList)
-    Object.entries(userList).map((el: any) => {
-      selectUser(el[0])
-    })
+    Object.entries(activeChat?.chatInfo?.participants)
+      .filter(
+        (_data: any) => _data[1].objectId != authState.auth.objectId
+      )
+      .map((_data: any) => {
+        const data = authUsers[_data[1].objectId];
+        console.log('data', data);
+        selectUser(data.objectId)
+      })
   }, [])
 
   const handleClickOpen = () => {
@@ -99,20 +95,50 @@ export const EditParticipantsModal = connect(
     setOpen(false);
   };
 
-  const handleExitModal = () => {
-    console.log(myObjId)
-    // const t = exitChatInfo({
-    //   _id: myObjId,
-    //   type: window.location,
-    //   refId: activeChat.chatInfo._id,
-    //   clientSide: activeChat.chatInfo.clientSide,
-    // });
-    // console.log(t)
-    
+  const handleSaveModal = () => {
+    let participants: any = [];
+    let selectParticipants: any = [];
+    participants.push({
+      objectId: authState.auth.objectId,
+      lastViewed: Date.now(),
+    });
+    Object.entries(userList).forEach((e: any) => {
+      if (e[1].selected) {
+        participants.push({
+          objectId: e[0],
+          lastViewed: Date.now(),
+        });
+        selectParticipants.push({
+          objectId: e[0],
+          lastViewed: Date.now(),
+        });
+      }
+    });
+
+    if(selectParticipants.length > 0) {
+
+    updateParticipants({
+    'chatInfo': {
+      _id: activeChat?.chatInfo?._id,
+      name: activeChat?.chatInfo?.name,
+      avatar: activeChat?.chatInfo?.avatar,
+      createdOn: activeChat?.chatInfo?.createdOn,
+      modifiedOn: activeChat?.chatInfo?.modifiedOn,
+      participants,
+      type: activeChat?.chatInfo?.type,
+      desc: activeChat?.chatInfo?.desc,
+    },
+    'messages': activeChat.messages
+    });
     setOpen(false);
+    setTextParticipants('')
+    } else {
+      setTextParticipants('В чате должен быть минимум один участник!')
+    }
   };
 
   const selectUser = (add: string) => {
+    setTextParticipants('')
     setUserList((prev: any) => ({
       ...prev,
       [add]: {
@@ -132,38 +158,8 @@ export const EditParticipantsModal = connect(
     }));
   };
 
-  const createNewGroup = ({}: any) => {
-    if (grpName.length <= 1) return;
-    const participants: any = [];
-    participants.push({
-      objectId: authState.auth.objectId,
-      lastViewed: Date.now(),
-    });
-    Object.entries(userList).forEach((e: any) => {
-      if (e[1].selected) {
-        participants.push({
-          objectId: e[0],
-          lastViewed: Date.now(),
-        });
-      }
-    });
-    createNewGroupStart({
-      _id: new ObjectID().toString(),
-      name: grpName,
-      avatar: newGroupIcon,
-      createdOn: Date.now(),
-      modifiedOn: Date.now(),
-      participants,
-      type: "group",
-      desc: `Чат создал ${authState.auth.displayName}`,
-    });
-    // console.log(closeModal)
-    // closeModal();
-  };
-
   return (
     <span>
-      {/* <CircularProgress size="50px" color="inherit" /> */}
       <Button 
         className={t.editButton}
         variant="text" 
@@ -171,7 +167,6 @@ export const EditParticipantsModal = connect(
         >
         <span className={s.editNameButton}>
             <svg
-                // onClick={() => setEditDesc(true)}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 width="24"
@@ -201,14 +196,13 @@ export const EditParticipantsModal = connect(
         }}
       >
         <DialogTitle id="responsive-dialog-title">
-          {"Редактирование участников"}
+          {`Редактирование участников чата "${activeChat?.chatInfo?.name}"`}
         </DialogTitle>
         <DialogContent 
           className={classes.dialogContent}
         >
           <DialogContentText>
         <div className={s.sidebarModalBody}>
-        {/* <div className={`${s.allChats} ${s.adduserstog}`}> */}
         <SidebarSearch typeSearch={searchType.newUserSearch}/>
           <div className={s.newGroupInfo}>
             <div className={s.addedUserInfo}>
@@ -236,19 +230,9 @@ export const EditParticipantsModal = connect(
                   })}
               </div>
             </div>
-            <input
-              value={grpName}
-              onChange={(e: any) => setGrpName(e.target.value)}
-              maxLength={30}
-              placeholder="Название чата"
-              type="text"
-            />
+            <div className={s.textParticipants}>{textParticipants}</div>
           </div>
           <p className={s.text}>Пользователи</p>
-          {/* Хардкод, чтобы протестить запрос */}
-          {/* <button onClick={createNewGroup} >
-            Создать
-          </button> */}
           <div className={s.chatsContainer}>
             {Object.entries(userList)
               .filter((e: any) => (e[1]?.selected ? false : true))
@@ -281,16 +265,11 @@ export const EditParticipantsModal = connect(
                 );
               })}
           </div>
-          <button onClick={createNewGroup} className={s.createGrpButton}>
-            Создать
-          </button>
-        {/* </div> */}
       </div>
           </DialogContentText>
         </DialogContent>
-        {/* <CircularProgress size="50px" color="inherit" /> */}
         <DialogActions className={classes.footerButtonsDisplay}>
-            <Button className={classes.footerButtonSave} autoFocus onClick={handleExitModal}>
+            <Button className={classes.footerButtonSave} autoFocus onClick={handleSaveModal}>
               Сохранить
             </Button>
             <Button className={classes.footerButtonCancel} onClick={handleCloseModal} autoFocus>
