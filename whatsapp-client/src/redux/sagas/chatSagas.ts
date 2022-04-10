@@ -15,7 +15,8 @@ import {
   setActiveChat,
   deleteChat,
   exitChat,
-  updateParticipantsDone
+  updateParticipantsDone,
+  sendMsgSuccessful
 } from "../reducers/chat";
 import store from "../store";
 import { globalAxios } from "config/globalAxios";
@@ -29,7 +30,7 @@ const getInitialChatData = async () => {
   });
   console.log(data)
   //@ts-ignore
-  return data.data;
+  return data? data?.data: [];
 };
 
 const getAllMessages = async (data: any) => {
@@ -40,7 +41,7 @@ const getAllMessages = async (data: any) => {
       
       const res = await globalAxios({
         method: "GET",
-        url: `/chats/${obj._id}`,
+        url: `/chats/${obj?._id}`,
         withCredentials: true,
       });
       
@@ -99,18 +100,18 @@ export function* initSendMsgStart() {
       // chat already existed, sending message
       socket.emit("iTextMessage", action.payload);
       
-      // //@ts-ignore
-      // const _all = yield call(getInitialChatData);
-      // //@ts-ignore
-      // const chats = yield call(getAllMessages, _all);
-      // const chatsObj = chats.reduce((result: any, item: any, index: number) => {
-      //   result[item[0]._id] = {
-      //     chatInfo: item[0],
-      //     messages: item[1],
-      //   };
-      //   return result;
-      // }, {});
-      // yield put(onChatsLoadComplete(chatsObj));
+      //@ts-ignore
+      const _all = yield call(getInitialChatData);
+      //@ts-ignore
+      const chats = yield call(getAllMessages, _all);
+      const chatsObj = chats.reduce((result: any, item: any, index: number) => {
+        result[item[0]._id] = {
+          chatInfo: item[0],
+          messages: item[1],
+        };
+        return result;
+      }, {});
+      yield put(onChatsLoadComplete(chatsObj));
     }
   });
 }

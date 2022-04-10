@@ -8,14 +8,13 @@ const _ = require('lodash');
 const getMessages = async (db: any, id: any) => {
   try {
     const refId = id;
-      
     const messages = await db
       .collection("messages")
       .find({ refId: refId })
       .sort({ timestamp: 1 })
       .toArray()
 
-    return messages[messages.length-1]
+    return messages?.length ? messages[messages.length-1] : {'timestamp': 0, 'refId': refId} 
   } catch (err) {
     console.log(err)
   }
@@ -25,7 +24,6 @@ const mergeArrays = (arr1: any, arr2: any) => {
 
   const merged = _.merge(_.keyBy(arr2, 'refId'), _.keyBy(arr1, '_id'));
   const values = _.values(merged);
-  // console.log(values)
   return values;
 };
 
@@ -53,7 +51,7 @@ export const getGroupsChats = async (req: any, res: any) => {
     
     const allChatsWithMessages = mergeArrays(chats, messagesChats)
     // console.log('allChats', allChatsWithMessages)
-    
+
     const groups: any = await db
       .collection("groups")
       .find({
@@ -70,7 +68,7 @@ export const getGroupsChats = async (req: any, res: any) => {
     }))
 
     const allGroupsWithMessages = mergeArrays(groups, messagesChats)
-    // console.log('allGroups', allGroupsWithMessages)
+    // // console.log('allGroups', allGroupsWithMessages)
 
     const fi: any = [...allChatsWithMessages, ...allGroupsWithMessages].sort(
       (x, y) => y.timestamp - x.timestamp
@@ -78,7 +76,7 @@ export const getGroupsChats = async (req: any, res: any) => {
     // const fi: any = [...chats, ...groups].sort(
     //   (x, y) => x.timestamp - y.timestamp
     // );
-    console.log(fi)
+    // console.log(fi)
     return res.status(201).json({
       data: fi,
     });

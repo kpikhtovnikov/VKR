@@ -141,6 +141,7 @@ export const ChatContainerFooter = connect(
       });
       // @ts-ignore
       inputRef.current.innerText = "";
+      setTyping(false);
     };
 
     const handleAttachments = async (e: any) => {

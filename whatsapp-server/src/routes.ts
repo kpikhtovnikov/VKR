@@ -39,6 +39,7 @@ router.get("/chats/:refId", isAuthREST, getMessages);
 
 // get chats, groups for a particular user
 router.get("/chats", isAuthREST, getGroupsChats);
+// router.get("/chats", getGroupsChats);
 
 // upload files
 router.post(
