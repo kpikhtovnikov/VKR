@@ -77,12 +77,20 @@ export const MessagePreview = connect(
         behavior: "smooth",
       });
       setActiveMsg((prev) => prev - 1);
-      setGlobalMsgInFocus(totalAvailableMedia[activeMsg - 1]._id);
+      if(activeMsg > 0) {
+        setGlobalMsgInFocus(totalAvailableMedia[activeMsg - 1]._id);
+      } else {
+        setActiveMsg((prev) => prev + 1);
+      }
     };
 
     const handleRight = () => {
       setActiveMsg((prev) => prev + 1);
-      setGlobalMsgInFocus(totalAvailableMedia[activeMsg + 1]._id);
+      if(activeMsg < totalAvailableMedia.length - 1) {
+        setGlobalMsgInFocus(totalAvailableMedia[activeMsg + 1]._id);
+      } else {
+        setActiveMsg((prev) => prev - 1);
+      }
       const px = (activeMsg + 1) * 64;
       sliderRef.current.scroll({
         left: px,
@@ -129,7 +137,7 @@ export const MessagePreview = connect(
       >
         <div className={s.header}>
           <div className={s.info}>
-            <img src={activeChat.chatInfo.avatar} alt="avatar" />
+            {/* <img src={activeChat.chatInfo.avatar} alt="avatar" />
             <div>
               <strong>
                 You @{" "}
@@ -139,13 +147,13 @@ export const MessagePreview = connect(
               </strong>
               <br />
               <small>today at 9:55 AM</small>
-            </div>
+            </div> */}
           </div>
           <div className={s.control}>
-            <ChatBubbleOutlineOutlinedIcon />
+            {/* <ChatBubbleOutlineOutlinedIcon />
             <StarIcon />
             <ReplyIcon />
-            <GetAppIcon />
+            <GetAppIcon /> */}
             <CloseIcon onClick={() => setGlobalModal(null)} />
           </div>
         </div>

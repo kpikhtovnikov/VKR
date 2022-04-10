@@ -43,7 +43,8 @@ export const SidebarChats = connect(
         ? data.chatInfo.participants.find((e: any) => e.objectId !== myObjId)
         : null;
 
-    const date = data.chatInfo?.timestamp ? new Date(data.chatInfo?.timestamp) : new Date()
+    // const date = data.chatInfo?.timestamp ? new Date(data.chatInfo?.timestamp) : new Date()
+    const date = data.chatInfo?.timestamp ? new Date(data.chatInfo?.timestamp).toLocaleString('ru') : new Date(data.chatInfo?.createdOn).toLocaleString('ru')
 
     let friend = {
       'objectId': 0
@@ -162,7 +163,8 @@ export const SidebarChats = connect(
                 : `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`}
             </p>} */}
             <p className={s.time}>
-                {`${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`}
+                {/* {`${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`} */}
+                {`${date}`}
             </p>
           </div>
           <div>
