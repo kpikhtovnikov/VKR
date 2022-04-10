@@ -116,11 +116,16 @@
         }
         .retakeBtn {
             button {
+                cursor: pointer;
                 color: whitesmoke;
                 svg {
                     height: 20px;
-                }
-            }
+                };
+            };
+        }
+        .retakeBtnText {
+            margin-left: 5px;
+            font-size: 14px;
         }
         .Theader {
             display: flex;
@@ -135,7 +140,8 @@
             background-color: #191f23;
 
             span {
-                background-color: #00af9c;
+                // background-color: #00af9c;
+                background-color: #156da0;
                 border-radius: 100%;
                 display: flex;
                 justify-content: center;
