@@ -5,19 +5,23 @@ import { setChatContainerModal } from "redux/reducers/chatContainerModal";
 import { setDropDown } from "redux/reducers/dropDown";
 import { ExitModalChatInfo } from "./ExitModalChatInfo";
 import { DeleteModalChatInfo } from "./DeleteModalChatInfo";
+import { setActiveChat } from "redux/reducers/chat";
 
-const passStateToProps = ({ dropDownMenu }: any) => ({
+const passStateToProps = ({ dropDownMenu, chatState, authState }: any) => ({
   dropMenu: dropDownMenu.dropDown,
+  activeChat: chatState.chat[chatState.activeChat],
+  myObjId: authState.auth.objectId,
 });
 
 const passDispatchToProps = (dispatch: any) => ({
   setChatContainerModal: (modal: any) => dispatch(setChatContainerModal(modal)),
   setDropMenu: (dropMenu: any) => dispatch(setDropDown(dropMenu)),
+  setActiveChat: (activeChat: any) => dispatch(setActiveChat(activeChat)),
 });
 
 
 export const ActiveChatInfo = connect(passStateToProps, passDispatchToProps)(
-  ({ dropMenu, fixedDropdown, setChatContainerModal, setDropMenu }: any) => {
+  ({ activeChat, myObjId, dropMenu, fixedDropdown, setChatContainerModal, setDropMenu, setActiveChat }: any) => {
     const sizeParam = {
       height: 170,
       width: 140,
@@ -25,11 +29,32 @@ export const ActiveChatInfo = connect(passStateToProps, passDispatchToProps)(
       xOffset: 142,
     };
 
+    const otherFriend =
+    activeChat?.chatInfo?.type === "chat"
+      ? activeChat?.chatInfo?.participants.find((e: any) => {
+          console.log(e);
+          return e.objectId !== myObjId;
+        })
+      : null;
+
     const handleInformationChatClick = () => {
       setDropMenu(false)
       setChatContainerModal({
         type: "userinfoModal",
       })
+    };
+
+    const handleActiveChat = () => {
+      setDropMenu(false);
+      setChatContainerModal(null);
+  
+      setActiveChat({
+        prevActiveChat: {
+          prevActiveChatId: activeChat?.chatInfo._id,
+          prevActiveChatType: activeChat?.chatInfo.type,
+        },
+        switchTo: null
+      });
     };
 
     return (
@@ -45,10 +70,17 @@ export const ActiveChatInfo = connect(passStateToProps, passDispatchToProps)(
           >Информация о чате</p>
         </div>
         <div className={s.list}>
-          <ExitModalChatInfo />
+          { otherFriend ? null : 
+            <ExitModalChatInfo />
+          }
         </div>
         <div className={s.list}>
           <DeleteModalChatInfo />
+        </div>
+        <div className={s.list}>
+          <p
+            onClick={handleActiveChat}
+          >Закрыть чат</p>
         </div>
       </DropdownAnimation>
     );

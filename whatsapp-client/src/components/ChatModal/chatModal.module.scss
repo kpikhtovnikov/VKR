@@ -33,7 +33,7 @@
   .infoModalBody {
     overflow-y: scroll;
     height: calc(100vh - 60px);
-    background-color: #0d1418;
+    // background-color: #0d1418;
     &::-webkit-scrollbar {
       width: 5px;
     }
@@ -53,7 +53,7 @@
     display: flex;
     align-items: center;
     font-size: 14px;
-    border-bottom: 8px solid #0d1418;
+    // border-bottom: 8px solid #0d1418;
     background-color: #131c21;
     padding: 0px 20px 0px 20px;
     // color: #ef697a;
@@ -90,6 +90,28 @@
     cursor: pointer;
   }
 
+  .closeButton {
+    display: flex;
+    // align-items: center;
+    justify-content: end;
+    font-size: 14px;
+    // border-bottom: 8px solid #0d1418;
+    background-color: #131c21;
+    padding: 0px 0px 0px 11px;
+    text-transform: "none"; 
+    color: #d3ad31;
+    cursor: pointer;
+  }
+
+  .closeButtonDiv {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .closeButtonText {
+    padding-left: 10px;
+    text-transform: none;
+  }
   .editButton {
     display: flex;
     align-items: center;

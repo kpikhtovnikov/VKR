@@ -8,11 +8,15 @@ import { ParticipantSection } from "./Components/ParticipantSection/ParticipantS
 import { setChatContainerModal } from "redux/reducers/chatContainerModal";
 import { useEffect, useState } from "react";
 import { deleteChat } from "redux/reducers/chat";
-import { Button, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { DeleteModal } from "./DeleteModal";
 import { ExitModal } from "./ExitModal";
 import { EditParticipantsModal } from "./EditParticipantsModal";
 import { setDropDown } from "redux/reducers/dropDown";
+import { setActiveChat } from "redux/reducers/chat";
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import CloseButton from "@material-ui/icons/Close";
 
 const passStateToProps = ({ chatModal, chatState, authState }: any) => ({
   chatContainerModal: chatModal.modal,
@@ -25,13 +29,14 @@ const passDispatchToProps = (dispatch: any) => ({
   setChatContainerModal: (modal: any) => dispatch(setChatContainerModal(modal)),
   deleteChatInfo: (payload: any) => dispatch(deleteChat(payload)),
   setDropMenu: (dropMenu: any) => dispatch(setDropDown(dropMenu)),
+  setActiveChat: (activeChat: any) => dispatch(setActiveChat(activeChat)),
 });
 
 
 export const UserInfoModal = connect(
   passStateToProps,
   passDispatchToProps
-)(({ activeChat, setReverseAnimation, myObjId, allUsers, deleteChatInfo, setDropMenu }: any) => {
+)(({ activeChat, setReverseAnimation, myObjId, allUsers, deleteChatInfo, setDropMenu, setActiveChat, setChatContainerModal }: any) => {
 
 
   const otherFriend =
@@ -45,6 +50,19 @@ export const UserInfoModal = connect(
   const handleHeaderClick = () => {
       setDropMenu(false)
       setReverseAnimation(true)
+  };
+
+  const handleActiveChat = () => {
+    setDropMenu(false);
+    setChatContainerModal(null);
+
+    setActiveChat({
+      prevActiveChat: {
+        prevActiveChatId: activeChat?.chatInfo._id,
+        prevActiveChatType: activeChat?.chatInfo.type,
+      },
+      switchTo: null
+    });
   };
 
   return (
@@ -91,6 +109,20 @@ export const UserInfoModal = connect(
           className={s.report}
         >
           <div>{otherFriend ? <DeleteModal /> : <DeleteModal />}</div>
+        </div>
+        <div className={s.closeButtonDiv}>
+          <Button 
+            className={s.closeButton}
+            variant="text" 
+            onClick={handleActiveChat}
+            >
+            { <IconButton className={s.closeButton} aria-label="delete">
+              <CloseButton fontSize="inherit"/>
+            </IconButton> }
+            <span className={s.closeButtonText}>
+              Закрыть чат
+            </span>
+          </Button>
         </div>
       </div>
     </div>

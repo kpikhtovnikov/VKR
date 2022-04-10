@@ -9,15 +9,15 @@
     height: 83px;
     background-color: #323739;
     display: flex;
-    align-items: flex-end;
-    font-size: 16px;
+    align-items: center;
+    // font-size: 16px;
     font-weight: 500;
     p {
       margin: 10px 10px 10px 25px;
     }
     svg {
-      height: 20px;
-      margin: 6px 0px 5px 10px;
+      height: 25px;
+      margin: 6px 0px 3px 10px;
     }
   }
   .sidebarModalBody {
@@ -97,7 +97,7 @@
     }
     .info {
       color: rgba(241, 241, 242, 0.45);
-      margin: 20px 20px 20px 20px;
+      margin: 20px 20px 10px 20px;
       font-size: 11.5px;
       text-align: left;
     }
@@ -166,8 +166,10 @@
   justify-content: space-between;
   padding-bottom: 3px;
   position: relative;
+  padding-top: 5px;
   .input {
     font-size: 12px;
+    padding-top: 5px;
     width: calc(100% - 50px);
     text-align: left;
     overflow-wrap: break-word;
