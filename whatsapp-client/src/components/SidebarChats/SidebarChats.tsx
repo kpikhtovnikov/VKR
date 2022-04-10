@@ -43,6 +43,8 @@ export const SidebarChats = connect(
         ? data.chatInfo.participants.find((e: any) => e.objectId !== myObjId)
         : null;
 
+    const date = data.chatInfo?.timestamp ? new Date(data.chatInfo?.timestamp) : new Date()
+
     let friend = {
       'objectId': 0
     }
@@ -156,8 +158,12 @@ export const SidebarChats = connect(
               }
             </p>
             {/* {<p className={s.time}>Четверг</p>} */}
-            {<p className={s.time}>{otherFriend ? allUsers[otherFriend.objectId]?.lastSeen
-                : data.chatInfo?.modifiedOn}</p>}
+            {/* {<p className={s.time}>{otherFriend ? allUsers[otherFriend.objectId]?.lastSeen
+                : `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`}
+            </p>} */}
+            <p className={s.time}>
+                {`${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`}
+            </p>
           </div>
           <div>
             <MsgPreview

@@ -56,6 +56,8 @@ export const ChatContainerHead = connect(
           })
         : null;
 
+        // const date = new Date(data.chatInfo?.timestamp)
+
     const initiateACall = () => {
       console.log('call start')
       initiateCall({
@@ -111,11 +113,12 @@ export const ChatContainerHead = connect(
               {otherFriend
                 ? allUsers[otherFriend.objectId]?.status
                   ? "Онлайн"
-                  : `Был в сети ${formatTime(
-                      allUsers[otherFriend.objectId]?.lastSeen
-                    )}, ${new Date(allUsers[otherFriend.objectId]?.lastSeen)
-                      .toString()
-                      .slice(0, 16)}`
+                  // : `Был в сети ${formatTime(
+                  //     allUsers[otherFriend.objectId]?.lastSeen
+                  //   )}, ${new Date(allUsers[otherFriend.objectId]?.lastSeen)
+                  //     .toString()
+                  //     .slice(0, 16)}`
+                  : `Был в сети ${new Date(allUsers[otherFriend.objectId]?.lastSeen).toLocaleString('ru')}`
                 : "Чат"}
             </small>
           </div>

@@ -37,6 +37,8 @@ export const AvatarSection = connect(
     );
     const [hoverForNewAvatar, setHoverForNewAvatar] = useState(false);
 
+    const date = chatInfo?.createdOn ? new Date(chatInfo?.createdOn).toLocaleString('ru') : new Date()
+
     const handleCompressedImage = (base64Data: string) => {
       initGroupInfoUpdate({
         groupId: chatInfo._id,
@@ -225,7 +227,7 @@ export const AvatarSection = connect(
                 )}
               </div>
             </div>
-            {otherFriend ? null : <small>Created 1/4/2021 at 12:04 AM</small>}
+            {otherFriend ? null : <small>{`Создано ${date}`}</small>}
           </div>
         </div>
       </div>
