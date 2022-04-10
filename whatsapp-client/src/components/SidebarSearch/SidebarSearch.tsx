@@ -2,7 +2,7 @@ import s from "./sidebarSearchStyles.module.scss";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
-import { setSearch, setChatSearch, setUserSearch, setNewUserSearch } from "redux/reducers/chat";
+import { setSearch, setChatSearch, setUserSearch } from "redux/reducers/chat";
 import { searchType } from "constants/searchText";
 
 const passStateToProps = ({ chatState }: any) => ({
@@ -12,11 +12,10 @@ const passStateToProps = ({ chatState }: any) => ({
 const passDispatchToProps = (dispatch: any) => ({
   setSearchChat: (search: any) => dispatch(setSearch(search)),
   setChatSearch: (chatSearch: any) => dispatch(setChatSearch(chatSearch)),
-  setUserSearch: (userSearch: any) => dispatch(setUserSearch(userSearch)),
-  setNewUserSearch: (newUserSearch: any) => dispatch(setNewUserSearch(newUserSearch))
+  setUserSearch: (userSearch: any) => dispatch(setUserSearch(userSearch))
 });
 
-export const SidebarSearch = connect(passStateToProps, passDispatchToProps)(({ chatState, setSearchChat, setChatSearch, setUserSearch, setNewUserSearch, typeSearch }: any) => {
+export const SidebarSearch = connect(passStateToProps, passDispatchToProps)(({ chatState, setSearchChat, setChatSearch, setUserSearch, typeSearch }: any) => {
   const [loading, setLoading] = useState(false);
   const [inputFocused, setInputFocused] = useState(false);
   const [search, setSearch] = useState(['', '']);
@@ -32,15 +31,8 @@ export const SidebarSearch = connect(passStateToProps, passDispatchToProps)(({ c
     if(search[1] === searchType.userSearch) {
       setUserSearch(search[0])
     }
-    if(search[1] === searchType.newUserSearch) {
-      setNewUserSearch(search[0])
-    }
 
   }, [search]);
-
-  // const handleSearch = (e: any) =>{
-  //   console.log(e)
-  // }
 
   return (
     <div className={s.search}>

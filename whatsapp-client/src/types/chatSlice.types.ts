@@ -46,5 +46,4 @@ export interface ChatStateType {
   search: { [k: string]: ChatType };
   chatSearch: {};
   userSearch: {}
-  newUserSearch: {}
 }

@@ -13,8 +13,7 @@ const initialState: ChatStateType = {
   chat: {},
   search: {},
   chatSearch: {},
-  userSearch: {},
-  newUserSearch: {},
+  userSearch: {}
 };
 
 export const chatSlice = createSlice({
@@ -43,10 +42,6 @@ export const chatSlice = createSlice({
 
     setUserSearch: (state, action: PayloadAction<any>) => {
       state.userSearch = action.payload
-    },
-
-    setNewUserSearch: (state, action: PayloadAction<any>) => {
-      state.newUserSearch = action.payload
     },
 
     setTotalAuthUsers: (state, action: PayloadAction<any>) => {
@@ -298,7 +293,6 @@ export const {
   setSearch,
   setChatSearch,
   setUserSearch,
-  setNewUserSearch,
   deleteChat,
   exitChat
 } = chatSlice.actions;

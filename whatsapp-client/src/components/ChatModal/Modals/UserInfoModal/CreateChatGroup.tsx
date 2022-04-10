@@ -74,7 +74,7 @@ export const CreateChatGroup = connect(
     <div>
       <div>
         <div>
-        <SidebarSearch typeSearch={searchType.newUserSearch}/>
+        <SidebarSearch typeSearch={searchType.userSearch}/>
           <div className={s.newGroupInfo}>
             <div className={s.addedUserInfo}>
               <div className={s.selectedUserDiv}>
@@ -115,7 +115,7 @@ export const CreateChatGroup = connect(
               .filter((e: any) => (e[1]?.selected ? false : true))
               .map((data: any) => {
                 return (
-                  (!chatState.newUserSearch.length || data[1].displayName.includes(chatState.newUserSearch)) ?
+                  (!chatState.userSearch.length || data[1].displayName.includes(chatState.userSearch)) ?
                   (<div
                     className={s.availableUsers}
                     key={data[0]}

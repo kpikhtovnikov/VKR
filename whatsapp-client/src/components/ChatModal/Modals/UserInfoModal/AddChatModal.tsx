@@ -17,6 +17,7 @@ import { useState } from 'react';
 import { ObjectID } from "bson";
 import { newGroupIcon } from 'components/SidebarModal/Modals/newGroupIcon';
 import { CreateChatGroup } from './CreateChatGroup';
+import { setUserSearch } from "redux/reducers/chat";
 
 const useStyles = makeStyles({
   dialogContent: {
@@ -59,6 +60,7 @@ const passDispatchToProps = (dispatch: any) => ({
   exitChatInfo: (payload: any) => dispatch(exitChat(payload)),
   createNewGroupStart: (payload: any) => dispatch(createNewGroup(payload)),
   setActiveChat: (activeChat: any) => dispatch(setActiveChat(activeChat)),
+  setUserSearch: (userSearch: any) => dispatch(setUserSearch(userSearch))
 });
 
 export const AddChatModal = connect(
@@ -74,7 +76,8 @@ export const AddChatModal = connect(
     createNewGroupStart,
     chatState,
     chats,
-    setActiveChat 
+    setActiveChat,
+    setUserSearch
   }: any) => {
   
   const [open, setOpen] = useState(false);
@@ -101,6 +104,7 @@ export const AddChatModal = connect(
   const handleCloseModal = () => {
     setOpen(false);
     setChatGroup(false);
+    setUserSearch('')
   };
 
   const selectUser = (add: string) => {
@@ -149,6 +153,7 @@ export const AddChatModal = connect(
       desc: `Чат создал ${authState.auth.displayName}`,
     });
     setOpen(false);
+    setUserSearch('')
   };
 
   const handleOnClick = (data: any) => {
@@ -162,6 +167,7 @@ export const AddChatModal = connect(
     });
 
     handleCloseModal();
+    setUserSearch('')
 
     if (doesChatExist) {
       setActiveChat({
@@ -188,6 +194,11 @@ export const AddChatModal = connect(
       });
     }
   };
+
+  const newChat = () => {
+    setUserSearch('')
+    setChatGroup(true)
+  }
 
   return (
     <p>

@@ -16,6 +16,7 @@ import { SidebarSearch } from 'components/SidebarSearch/SidebarSearch';
 import { searchType } from "constants/searchText";
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { setUserSearch } from "redux/reducers/chat";
 
 const useStyles = makeStyles({
   dialogContent: {
@@ -52,6 +53,7 @@ const passStateToProps = ({ chatState, authState }: any) => ({
 const passDispatchToProps = (dispatch: any) => ({
   exitChatInfo: (payload: any) => dispatch(exitChat(payload)),
   updateParticipants: (payload: any) => dispatch(updateParticipantsGroup(payload)),
+  setUserSearch: (userSearch: any) => dispatch(setUserSearch(userSearch))
 });
 
 export const EditParticipantsModal = connect(
@@ -65,7 +67,8 @@ export const EditParticipantsModal = connect(
     authUsers, 
     authState, 
     chatState, 
-    updateParticipants
+    updateParticipants,
+    setUserSearch
   }: any) => {
   
   const [open, setOpen] = useState(false);
@@ -92,6 +95,7 @@ export const EditParticipantsModal = connect(
   };
 
   const handleCloseModal = () => {
+    setUserSearch('')
     setOpen(false);
   };
 
@@ -131,6 +135,7 @@ export const EditParticipantsModal = connect(
     'messages': activeChat.messages
     });
     setOpen(false);
+    setUserSearch('')
     setTextParticipants('')
     } else {
       setTextParticipants('В чате должен быть минимум один участник!')
@@ -203,7 +208,7 @@ export const EditParticipantsModal = connect(
         >
           <DialogContentText>
         <div className={s.sidebarModalBody}>
-        <SidebarSearch typeSearch={searchType.newUserSearch}/>
+        <SidebarSearch typeSearch={searchType.userSearch}/>
           <div className={s.newGroupInfo}>
             <div className={s.addedUserInfo}>
               <div className={s.selectedUserDiv}>
@@ -238,7 +243,7 @@ export const EditParticipantsModal = connect(
               .filter((e: any) => (e[1]?.selected ? false : true))
               .map((data: any) => {
                 return (
-                  (!chatState.newUserSearch.length || data[1].displayName.includes(chatState.newUserSearch)) ?
+                  (!chatState.userSearch.length || data[1].displayName.includes(chatState.userSearch)) ?
                   (<div
                     //   onClick={() => handleOnClick(data)}
                     className={s.availableUsers}
