@@ -126,7 +126,7 @@ export const Picture = connect(
             />
             <div className={s._A}>
               <small style={{ marginRight: extraParam.owner ? 0 : 5 }}>
-                {formatTime(timestamp)}
+              <small>{new Date(timestamp).toLocaleString('ru', {hour: '2-digit', minute:'2-digit'})}</small>
               </small>
               {extraParam.owner ? (
                 <SeenStats type={stillSending ? -1 : extraParam.seenStatus} />

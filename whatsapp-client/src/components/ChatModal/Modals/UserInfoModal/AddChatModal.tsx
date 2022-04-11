@@ -60,7 +60,8 @@ const passDispatchToProps = (dispatch: any) => ({
   exitChatInfo: (payload: any) => dispatch(exitChat(payload)),
   createNewGroupStart: (payload: any) => dispatch(createNewGroup(payload)),
   setActiveChat: (activeChat: any) => dispatch(setActiveChat(activeChat)),
-  setUserSearch: (userSearch: any) => dispatch(setUserSearch(userSearch))
+  setUserSearch: (userSearch: any) => dispatch(setUserSearch(userSearch)),
+  createNewChat: (payload: any) => dispatch(createNewChat(payload)),
 });
 
 export const AddChatModal = connect(
@@ -77,7 +78,8 @@ export const AddChatModal = connect(
     chatState,
     chats,
     setActiveChat,
-    setUserSearch
+    setUserSearch,
+    createNewChat
   }: any) => {
   
   const [open, setOpen] = useState(false);
@@ -166,9 +168,6 @@ export const AddChatModal = connect(
       return bool1 && bool2;
     });
 
-    handleCloseModal();
-    setUserSearch('')
-
     if (doesChatExist) {
       setActiveChat({
         prevActiveChat: {
@@ -193,6 +192,8 @@ export const AddChatModal = connect(
         modifiedOn: Date.now(),
       });
     }
+    handleCloseModal();
+    setUserSearch('')
   };
 
   const newChat = () => {

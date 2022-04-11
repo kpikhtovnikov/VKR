@@ -44,8 +44,7 @@ export const SidebarChats = connect(
         : null;
 
     // const date = data.chatInfo?.timestamp ? new Date(data.chatInfo?.timestamp) : new Date()
-    const date = data.chatInfo?.timestamp ? new Date(data.chatInfo?.timestamp).toLocaleString('ru') : new Date(data.chatInfo?.createdOn).toLocaleString('ru')
-
+    const date = data.chatInfo?.timestamp ? new Date(data.chatInfo?.timestamp).toLocaleString('ru', {day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute:'2-digit'}) : new Date().toLocaleString('ru', {day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute:'2-digit'})
     let friend = {
       'objectId': 0
     }

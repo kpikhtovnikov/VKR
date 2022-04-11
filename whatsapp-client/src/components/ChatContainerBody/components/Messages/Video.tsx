@@ -145,7 +145,7 @@ export const Video = connect(
                   </div>
                   {extraParam.owner ? (
                     <div className={s._A}>
-                      <small>{formatTime(timestamp)}</small>
+                      <small>{new Date(timestamp).toLocaleString('ru', {hour: '2-digit', minute:'2-digit'})}</small>
                       <SeenStats
                         type={stillSending ? -1 : extraParam.seenStatus}
                       />{" "}
@@ -157,7 +157,7 @@ export const Video = connect(
                           marginRight: "5px",
                         }}
                       >
-                        {formatTime(timestamp)}
+                        <small>{new Date(timestamp).toLocaleString('ru', {hour: '2-digit', minute:'2-digit'})}</small>
                       </small>
                     </div>
                   )}

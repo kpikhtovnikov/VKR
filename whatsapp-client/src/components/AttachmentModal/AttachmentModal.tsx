@@ -4,7 +4,7 @@ import { Image } from "./components/Image";
 import { Video } from "./components/Video";
 import { File } from "./components/File";
 import { PreviewFooter } from "./components/PreviewFooter";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { VideoPlayer } from "../VideoPlayer/VideoPlayer";
 import { BlendFromBottomAnimation } from "animations/BlendFromBottomAnimation";
@@ -39,6 +39,7 @@ const passStateToProps = ({ attachmentModal, chatState }: any) => ({
   attachmentModalFor: attachmentModal.modalFor,
   fileInPreview: attachmentModal.files[attachmentModal.fileInPreview],
   activeChat: chatState.chat[chatState.activeChat],
+  attachmentModal
 });
 
 const passDispatchToProps = (dispatch: any) => ({
@@ -56,6 +57,7 @@ export const AttachmentModal = connect(
     fileInPreview,
     resetAttachmentModal,
     activeChat,
+    attachmentModal
   }: any) => {
     const [
       reverseAttachmentModalAnimation,
@@ -81,15 +83,15 @@ export const AttachmentModal = connect(
       >
         <header>
           <CloseIcon onClick={closeAttachmentModal} />
-          <strong>Предварительный просмотр</strong>
+          <strong>Просмотр перед отправкой</strong>
         </header>
         <div className={s.previewInFocus}>
-          <FilePreview file={fileInPreview[0]} />
-          {!["image", "video"].includes(
+          {fileInPreview ? <FilePreview file={fileInPreview[0]} /> : null}
+          {fileInPreview ? !["image", "video"].includes(
             fileInPreview[0]?.type?.split("/")[0]
           ) ? (
             <small>{fileInPreview[0]?.name}</small>
-          ) : null}
+          ) : null : 'Отправьте текущие файлы или добавьте новый'}
         </div>
         <PreviewFooter closeAttachmentModal={closeAttachmentModal} />
       </BlendFromBottomAnimation>

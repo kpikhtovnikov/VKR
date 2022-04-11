@@ -9,6 +9,9 @@ import { useEffect, useRef } from "react";
 import { setDropDown } from "redux/reducers/dropDown";
 
 const Message = ({ data, _side, extraParam }: any) => {
+  console.log('data', data)
+  console.log('_side', _side)
+  console.log('extraParam', extraParam)
   switch (data.msgType) {
     case "text":
       return <Text msgPosition={_side} {...data} extraParam={extraParam} />;

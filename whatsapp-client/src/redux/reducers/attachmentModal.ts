@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState: any = {
   modalFor: null,
@@ -25,10 +25,13 @@ export const attachmentModalSlice = createSlice({
     uploadAttachmentsFailed: (state, action) => {},
 
     removeAttachment: (state, action) => {
+      console.log(action.payload)
       state.files.splice(action.payload, 1);
+      console.log(current(state).files)
     },
 
     changeFileInPreview: (state, action) => {
+      console.log(action.payload)
       state.fileInPreview = action.payload;
     },
 

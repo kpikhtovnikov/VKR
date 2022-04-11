@@ -92,12 +92,14 @@ export const PreviewFooter = connect(
     };
 
     const handleFileRemoval = (index: number) => {
+      console.log(index)
+      console.log(attachmentModal.files)
       if (attachmentModal.files.length === 1) {
         closeAttachmentModal();
         return;
       }
-      if (attachmentModal.files[index + 1]) {
-        changeFileInPreview(index + 1);
+      if (attachmentModal.files[index]) {
+        changeFileInPreview(index);
       }
       removeFile(index);
     };
