@@ -5,13 +5,10 @@ import { Text } from "./components/Messages/Text";
 import { Video } from "./components/Messages/Video";
 import { Voice } from "./components/Messages/Voice";
 import { connect } from "react-redux";
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { setDropDown } from "redux/reducers/dropDown";
 
 const Message = ({ data, _side, extraParam }: any) => {
-  console.log('data', data)
-  console.log('_side', _side)
-  console.log('extraParam', extraParam)
   switch (data.msgType) {
     case "text":
       return <Text msgPosition={_side} {...data} extraParam={extraParam} />;
@@ -42,9 +39,33 @@ export const ChatContainerBody = connect(
   passDispatchToProps
 )(({ activeChat, setDropMenu, authState, authUsers }: any) => {
   const chatRef: any = useRef(null);
+  const arrayDate: any = []
+  const [t, setT] = useState(arrayDate)
+
   useEffect(() => {
     chatRef.current.scrollTop = chatRef.current.scrollHeight;
   }, [activeChat?.messages]);
+
+  useMemo(() => {
+    let date: any;
+    activeChat?.messages.map((chatData: any, i: number) => {
+      console.log(new Date(chatData.timestamp).toLocaleString('ru', {day: '2-digit', month:'2-digit', year:'2-digit'}))
+      if(i===0){
+        
+        arrayDate.push(new Date(chatData.timestamp).toLocaleString('ru', {day: '2-digit', month:'2-digit', year:'2-digit'}));
+        date = new Date(chatData.timestamp).toLocaleString('ru', {day: '2-digit', month:'2-digit', year:'2-digit'});
+      
+      } else if((i+1) <= activeChat?.messages.length && new Date(chatData.timestamp).toLocaleString('ru', {day: '2-digit', month:'2-digit', year:'2-digit'})) {
+        
+        if(date !== new Date(chatData.timestamp).toLocaleString('ru', {day: '2-digit', month:'2-digit', year:'2-digit'})) {
+          arrayDate.push(new Date(chatData.timestamp).toLocaleString('ru', {day: '2-digit', month:'2-digit', year:'2-digit'}));
+          date = new Date(chatData.timestamp).toLocaleString('ru', {day: '2-digit', month:'2-digit', year:'2-digit'});
+        } else {
+          arrayDate.push(null); 
+        }
+      }
+    })
+  }, [activeChat?.messages])
 
   return (
     <div
@@ -67,6 +88,7 @@ export const ChatContainerBody = connect(
         const owner = chatData.sentBy === authState.objectId;
         const _classname = owner ? s.RightWrap : s.LeftWrap;
         const _side = owner ? "right" : "left";
+
         const getSeenStatus = () => {
           // let seen = 2;
           // // 0-> Single Tick  1-> Double Tick  2-> Blue
@@ -88,6 +110,9 @@ export const ChatContainerBody = connect(
 
         return (
           <div key={chatData._id} className={_classname}>
+            <div className={s.dateMiddleScreen}>
+              {arrayDate[i]}
+            </div>
             <Message
               _side={_side}
               data={chatData}

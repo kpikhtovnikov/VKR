@@ -18,7 +18,9 @@ export const attachmentModalSlice = createSlice({
       state.files.push(...action.payload);
     },
 
-    uploadAttachments: (state, action) => {},
+    uploadAttachments: (state, action) => {
+      // state.files.push(...action.payload);
+    },
 
     uploadAttachmentsSuccessful: (state, action) => {},
 

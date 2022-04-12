@@ -145,24 +145,11 @@ export const SidebarChats = connect(
         <span className={s.chatInfo}>
           <div>
             <p>
-              {/* {!chatState.search.length ? (
-                otherFriend ? allUsers[otherFriend.objectId]?.displayName
-                : data.chatInfo?.name
-                ) :
-                (
-                  null
-                )
-              } */}
               { otherFriend ? allUsers[otherFriend.objectId]?.displayName
                 : data.chatInfo?.name
               }
             </p>
-            {/* {<p className={s.time}>Четверг</p>} */}
-            {/* {<p className={s.time}>{otherFriend ? allUsers[otherFriend.objectId]?.lastSeen
-                : `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`}
-            </p>} */}
             <p className={s.time}>
-                {/* {`${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`} */}
                 {`${date}`}
             </p>
           </div>

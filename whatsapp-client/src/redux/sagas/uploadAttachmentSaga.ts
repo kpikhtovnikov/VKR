@@ -87,6 +87,7 @@ const sendInitialMessages = (data: any) => {
 
 export function* initFileUpload() {
   yield takeLatest(uploadAttachments.type, function* (action: any) {
+    console.log('uploadAttachments')
     yield put(resetFileAttachmentModal(null));
     // update UI (sending state)
     yield call(sendInitialMessages, action.payload);
