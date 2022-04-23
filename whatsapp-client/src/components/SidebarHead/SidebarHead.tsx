@@ -6,6 +6,7 @@ import { SidebarSearch } from "../SidebarSearch/SidebarSearch";
 import { searchType } from "constants/searchText";
 import { AddChatModal } from "components/ChatModal/Modals/UserInfoModal/AddChatModal";
 import { CreateChatGroup } from "components/ChatModal/Modals/UserInfoModal/CreateChatGroup";
+import { SpaRounded } from "@material-ui/icons";
 
 
 const passDispatchToProps = (dispatch: any) => ({
@@ -81,15 +82,20 @@ export const SidebarHead = connect(
           }}
           className={s.avatar}
         >
-          {authState.avatar ? (
-            <img src={authState.avatar} alt="" />
-          ) : (
+          {/* {authState.avatar ? ( */}
+            {/* <img src={authState.avatar} alt="" /> */}
+            <div className={s.svgIcon}>
+              <svg className={s.svgIcon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                <path d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+              </svg>
+            </div>
+          {/* ) : (
             <div className={s.mainIcon}>
               <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
               </svg>
             </div>
-          )}
+          )} */}
         </span>
         <SidebarSearch typeSearch={searchType.chatSearch}/>
         {/* <AddChatModal /> */}

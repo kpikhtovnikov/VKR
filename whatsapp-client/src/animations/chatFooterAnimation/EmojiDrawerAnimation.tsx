@@ -9,12 +9,16 @@ export const EmojiDrawerAnimation = ({
   const style = useSpring({
     config: {
       mass: 1,
-      tension: 200,
+      tension: 400,
     },
     onRest: onClose,
-    // onChange: (e: any) => console.log(e),
     to: {
-      height: reverse ? 0 : 300,
+      position: 'absolute',
+      height: reverse ? 0 : 260,
+      width: "70%",
+      marginLeft: 130,
+      bottom: 50,
+      right: 25
     },
     from: {
       height: 0,

@@ -33,6 +33,7 @@ import { setDropDown } from "redux/reducers/dropDown";
 import { sendMsgStart } from "redux/reducers/chat";
 import { parseAttachmentFiles } from "utils/parseAttachementFiles";
 import { setGlobalModal } from "redux/reducers/globalModal";
+import { TrendingUpRounded } from "@mui/icons-material";
 
 const passStateFromProps = ({
   chatState,
@@ -117,6 +118,17 @@ export const ChatContainerFooter = connect(
       }
     };
 
+    const smileContainerClick = () => {
+      console.log(reverseActivityAnimation)
+      if (activity) {
+        setReverseActivityAnimation(true);
+        setActivity(false)
+      } else {
+        setReverseActivityAnimation(false);
+        setActivity("emojiDrawer")
+      }
+    }
+
     const stopRecording = () => {
       if (reverseRecordingAnimation) {
         setReverseRecording(false);
@@ -190,35 +202,6 @@ export const ChatContainerFooter = connect(
       }
     };
 
-    // const attachmentsArray = [
-    //   <PictureIcon className={s.pictureIcon}>
-    //     <input
-    //       onChange={handleAttachments}
-    //       multiple={true}
-    //       type="file"
-    //       accept="image/png"
-    //     />
-    //   </PictureIcon>,
-    //   <CameraIcon onClick={takePhoto} className={s.cameraIcon} />,
-    //   <DocumentIcon className={s.docIcon}>
-    //     <input
-    //       onChange={handleAttachments}
-    //       type="file"
-    //       multiple={false}
-    //       accept=".docx, .doc, .pdf, .zip, .rar"
-    //     />
-    //   </DocumentIcon>,
-    //   // <AvatarIcon className={s.avatarIcon} />,
-    //   <VideoCallIcon className={s.videoIcon}>
-    //     <input
-    //       onChange={handleAttachments}
-    //       type="file"
-    //       multiple={false}
-    //       accept="video/mp4"
-    //     />
-    //   </VideoCallIcon>,
-    // ];
-
     const attachmentsArray = [
       {
         'element':
@@ -264,23 +247,6 @@ export const ChatContainerFooter = connect(
       // <AvatarIcon className={s.avatarIcon} />,
     ];
 
-    const toggleDropdown = (e: any) => {
-      if (dropDown.type === "addFiles") {
-        setPersonalSettingsDropdown({
-          type: "",
-        });
-      } else {
-        setPersonalSettingsDropdown({
-          type: "addFiles",
-          position: {
-            x: e.target.getBoundingClientRect().left,
-            y: e.target.getBoundingClientRect().top - 200
-          },
-          params: {},
-        });
-      };
-    };
-
     return (
       <>
         {activity ? (
@@ -300,14 +266,15 @@ export const ChatContainerFooter = connect(
           className={s.footer}
         >
           <div className={s.footerControls}>
-            {activity ? (
+            {/* {activity ? (
               <ExpandOptions reverse={reverseActivityAnimation}>
                 <CloseIcon
                   onClick={() => setReverseActivityAnimation(true)}
                   className="icons"
                 />
               </ExpandOptions>
-            ) : null}
+              // <div></div>
+            ) : null} */}
             <div className={s.attachmentButton}>
               {attachmentMenu ? (
                 <ShowAttachmentAnimations
@@ -328,11 +295,6 @@ export const ChatContainerFooter = connect(
                 className="icons"
               >
               </AttachmentIcon>
-              {/* <AttachmentIcon
-                onClick={toggleDropdown}
-                className="icons"
-              >
-              </AttachmentIcon> */}
             </div>
           </div>
           <div
@@ -380,7 +342,8 @@ export const ChatContainerFooter = connect(
           </div>
           <div className={s.footerControls}>
             <SmileIcon
-                onClick={() => setActivity("emojiDrawer")}
+                onClick={smileContainerClick}
+                // onClick={() => setActivity("emojiDrawer")}
                 className={`icons ${
                   activity === "emojiDrawer" ? "active-icon" : ""
                 }`}

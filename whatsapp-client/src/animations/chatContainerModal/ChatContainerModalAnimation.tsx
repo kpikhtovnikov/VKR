@@ -13,12 +13,15 @@ export const ChatContainerModalAnimation = ({
         },
         onRest: onClose,
         from: {
-            right: "-100%",
+            // right: "100%",
+            up: "-100%",
+            // bottom: "100",
             width: "0%",
         },
         to: {
             width: reverse ? "0%" : "100%",
-            right: reverse ? "-100%" : "0%",
+            // right: reverse ? "-100%" : "0%",
+            up: reverse ? "-100%" : "0%",
         },
     });
 
