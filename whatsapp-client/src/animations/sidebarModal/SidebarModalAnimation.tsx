@@ -15,7 +15,7 @@ export const SidebarModalAnimation = ({
         onRest: closeModal,
         to: [{ left: reverse ? "-100%" : "0%" }],
         from: {
-            left: "100%",
+            left: "-100%",
         },
     });
 
