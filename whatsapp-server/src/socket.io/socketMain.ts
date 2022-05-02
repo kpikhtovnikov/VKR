@@ -98,11 +98,6 @@ export const socketMain = async (io: any, socket: any) => {
     // Handle online status
     socket.broadcast.emit("online", _id);
 
-    // // Handle chat switches
-    // socket.on("switchActiveChat", async (payload: any) =>
-    //   switchActiveChat(io, socket, _id, db, payload)
-    // );
-
     // Handle disconnect event
     socket.on("disconnect", async () => socketDisconnect(socket, _id, db));
   } catch (err) {

@@ -13,7 +13,7 @@ import { logout } from "./controllers/logout.controller";
 import { handleDeleteChat } from "./controllers/handleDeleteChat.controller";
 import { handleExitChat } from "./controllers/handleExitChat.controller";
 import { handleUpdateParticipantsGroup } from "./controllers/handleUpdateParticipantsGroup.controller";
-const router: express.Router = express.Router();
+export const router: express.Router = express.Router();
 
 // temp upload location for files
 const uploadLocation = multer({ dest: "uploads/" });
@@ -39,7 +39,6 @@ router.get("/chats/:refId", isAuthREST, getMessages);
 
 // get chats, groups for a particular user
 router.get("/chats", isAuthREST, getGroupsChats);
-// router.get("/chats", getGroupsChats);
 
 // upload files
 router.post(

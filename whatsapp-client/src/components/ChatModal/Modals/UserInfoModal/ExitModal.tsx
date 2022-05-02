@@ -56,7 +56,6 @@ export const ExitModal = connect(
 
   return (
     <p>
-      {/* <CircularProgress size="50px" color="inherit" /> */}
       <Button 
         className={s.exitModal}
         variant="text" 
@@ -83,7 +82,6 @@ export const ExitModal = connect(
             Вы действительно хотите выйти из чата?
           </DialogContentText>
         </DialogContent>
-        {/* <CircularProgress size="50px" color="inherit" /> */}
         <DialogActions>
           <Button autoFocus onClick={handleExitModal}>
             Да

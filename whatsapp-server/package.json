@@ -5,7 +5,8 @@
   "main": "./src/server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./src/server.ts"
+    "dev": "nodemon ./src/server.ts",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -37,6 +38,7 @@
     "@types/jsonwebtoken": "^8.5.5",
     "@types/multer": "^1.4.7",
     "@types/node": "^16.10.2",
+    "jest": "^28.0.3",
     "nodemon": "^2.0.12"
   }
 }

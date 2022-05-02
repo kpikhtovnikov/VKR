@@ -17,13 +17,7 @@ import { Login } from "./components/Login/Login";
 import { MovableModal } from "./components/MovableModal/MovableModal";
 import { RoomModal } from "./components/RoomModal/RoomModal";
 import { Sidebar } from "./components/Sidebar/Sidebar";
-import { getAccessToken } from "utils/accessToken";
-import { SidebarChatSkeletons } from "skeletons/SidebarChatSkeletons";
-import { SidebarChats } from "components/SidebarChats/SidebarChats";
-import { SidebarVoices } from "components/SidebarVoices/SidebarVoices";
 import VideoPage from "components/videoPage/videoPage";
-import { DeleteModal } from "components/ChatModal/Modals/UserInfoModal/DeleteModal";
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
 const passStateToProps = ({ authState, chatState }: any) => ({
   authState,

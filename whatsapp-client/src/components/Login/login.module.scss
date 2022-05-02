@@ -6,6 +6,15 @@
   .loginControls {
     display: flex;
     flex-direction: column;
+    
+    .buttonKnow {
+      background-color: #611658;
+      margin-bottom: 5px;
+    }
+    
+    .buttonConnect {
+      background-color: #176e4d,
+    } 
     button {
       border: none;
       outline: none;

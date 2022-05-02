@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { initiateSignin, setAuthFailed } from "redux/reducers/auth";
 import s from "./login.module.scss";
 import { GoogleLogin } from "react-google-login";
-// import whatsappLogo from "./WhatsApp.svg.webp";
-import whatsappLogo from "./tab-picture.png";
+import webLogo from "./tab-picture.png";
 import { useState } from "react";
 
 const passStateToProps = ({ authState }: any) => ({
@@ -90,7 +89,7 @@ export const Login = connect(
 
   return (
     <div className={s.login}>
-      <img src={whatsappLogo} alt="app-icon" />
+      <img src={webLogo} alt="app-icon" />
       {/* <p>Загрузка</p> */}
       <p>Войдите с помощью Google</p>
       {authLoading ? (
@@ -99,18 +98,6 @@ export const Login = connect(
         </div>
       ) : (
         <div className={s.loginControls}>
-          {/* <input
-            onChange={(e) => handleCompany(e)}
-            placeholder="Название компании"
-          />
-          <input
-            onChange={(e) => handleEmployee(e)}
-            placeholder="Должность"
-          />
-          <input
-            onChange={(e) => handleAge(e)}
-            placeholder="Возраст"
-          /> */}
           <GoogleLogin
             onSuccess={handleGoogleResponse}
             onFailure={handleGoogleResponse}
@@ -122,16 +109,12 @@ export const Login = connect(
             )}
             cookiePolicy={"single_host_origin"}
           />
-
-          {/* <button
-            onClick={() =>
-              initiateSignin({
-                authType: "guest",
-              })
-            }
-          >
-            Sign in as guest
-          </button> */}
+          <button className={s.buttonKnow}>
+            Узнать больше
+          </button>
+          <button className={s.buttonConnect} >
+            Связаться с представителем системы
+          </button>
         </div>
       )}
     </div>
