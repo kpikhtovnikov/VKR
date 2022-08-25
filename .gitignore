@@ -99,5 +99,4 @@ messenger-client/.yarn-integrity
 messenger-client/.env
 messenger-client/.firebaserc
 messenger-client/firebase.json
-
 .vscode
