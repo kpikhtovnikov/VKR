@@ -44,7 +44,7 @@ router.get("/chats", isAuthREST, getGroupsChats);
 router.post(
   "/file-upload/:fileType",
   isAuthREST,
-  uploadLocation.single("whatsapp-clone-message-file"),
+  uploadLocation.single("messenger-clone-message-file"),
   handleFileUpload
 );
 

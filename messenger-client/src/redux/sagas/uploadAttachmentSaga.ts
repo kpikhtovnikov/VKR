@@ -17,7 +17,7 @@ export const uploadFile = async (attachmentArr: any[], msginfo: any) => {
   return await Promise.all(
     attachmentArr.map(async (_data: any) => {
       const formData = new FormData();
-      formData.append("whatsapp-clone-message-file", _data[0]);
+      formData.append("messenger-clone-message-file", _data[0]);
 
       const fileType = _data[0].type.split("/")[0];
       const msgType = ["image", "video"].includes(fileType)

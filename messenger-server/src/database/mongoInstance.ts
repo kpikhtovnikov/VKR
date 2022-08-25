@@ -1,7 +1,7 @@
 import { error } from "console";
 import * as mongodb from "mongodb";
 const MongoClient = mongodb.MongoClient;
-// const mongoURI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@whatsapp-clone-mongodb.bgdrv.mongodb.net/whatsapp-clone?retryWrites=true&w=majority`;
+// const mongoURI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@messenger-clone-mongodb.bgdrv.mongodb.net/messenger-clone?retryWrites=true&w=majority`;
 // const mongoURI = `mongodb+srv://test:TQf807E0w7hjXdXq@cluster0.rwvpw.mongodb.net/Cluster0?retryWrites=true&w=majority`
   const mongoURI = 'mongodb://127.0.0.1:27017';
 

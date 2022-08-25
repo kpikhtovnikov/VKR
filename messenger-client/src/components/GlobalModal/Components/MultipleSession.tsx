@@ -4,7 +4,7 @@ export const MultipleSession = () => {
   return (
     <div className={s.removeAvatar}>
       <p>
-        WhatsApp Clone is open in another window. Click "Use Here" to use in
+        messenger Clone is open in another window. Click "Use Here" to use in
         this window.
       </p>
       <div className={s.controlFooter}>

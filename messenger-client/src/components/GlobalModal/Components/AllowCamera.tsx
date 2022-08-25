@@ -50,10 +50,6 @@ export const AllowCamera = connect(
       </span>
       <span>
         <p className={s.allowCamText}>Allow camera</p>
-        <p className={s.allowCamPara}>
-          To take photos, click "Allow" above to give WhatsApp access to <br />
-          your computer's camera.
-        </p>
         <button className={s.coloredBtn}>OK, GOT IT</button>
       </span>
     </div>

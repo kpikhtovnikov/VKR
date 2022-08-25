@@ -19,7 +19,7 @@ export const AllowMicrophone = () => {
             <span>
                 <p className={s.allowCamText}>Allow microphone</p>
                 <p className={s.allowCamPara}>
-                    To record audio, click "Allow" above to give WhatsApp access
+                    To record audio, click "Allow" above to give messenger access
                     to <br />
                     your computer's microphone.
                 </p>
